@@ -29,6 +29,7 @@ export interface ToolPageLayoutProps {
   renderOptions?: (options: Record<string, unknown>, setOptions: (opts: Record<string, unknown>) => void, files: AppFile[]) => React.ReactNode;
   renderCustomUpload?: (files: AppFile[], addFiles: (files: File[]) => void) => React.ReactNode;
   renderCustomResult?: (results: ProcessorResult[], files: AppFile[]) => React.ReactNode;
+  children?: React.ReactNode;
 }
 
 function initOptions(tool: ToolDefinition): Record<string, unknown> {
@@ -47,6 +48,7 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
   renderOptions,
   renderCustomUpload,
   renderCustomResult,
+  children,
 }) => {
   const [files, setFiles] = useState<AppFile[]>([]);
   const [options, setOptions] = useState<Record<string, unknown>>(() => initOptions(tool));
@@ -217,6 +219,8 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
 
         {tool.status === 'coming-soon' ? (
           <ComingSoon tool={tool} />
+        ) : children ? (
+          <div className={styles.workspace}>{children}</div>
         ) : (
           <div className={styles.workspace}>
             {/* Upload Area */}

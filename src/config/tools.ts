@@ -380,25 +380,42 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'merge',
     category: 'pdf',
     path: '/pdf/merge',
-    description: 'Combine multiple PDF files into one single document.',
-    shortDescription: 'Combine multiple PDFs',
-    icon: '🔗',
+    description: 'Combine multiple PDFs into a single document. Drag and drop to reorder files. Processing happens securely in your browser.',
+    shortDescription: 'Combine multiple PDFs into one document',
+    icon: '📑',
     acceptedTypes: ['application/pdf'],
     maxFileSizeMB: 100,
     maxFiles: 50,
-    status: 'coming-soon',
-    popular: true,
     seo: {
-      title: 'Merge PDF Files Online | Tools',
-      description: 'Combine and merge multiple PDF documents into a single file easily.',
-      keywords: ['merge pdf', 'combine pdf', 'join pdf files']
+      title: 'Merge PDF Files Online Free | Combine PDFs Locally',
+      description: 'Combine multiple PDF files into a single document directly in your browser. Drag and drop to reorder, completely private and free.',
+      keywords: ['merge pdf', 'combine pdf', 'join pdf files', 'pdf merger', 'browser pdf tool']
     },
     faq: [
-      { question: 'Is it free?', answer: 'Yes, all our tools are completely free to use.' },
-      { question: 'Is my data secure?', answer: 'Yes, processing will happen securely in your browser.' }
+      {
+        question: 'Is my data secure?',
+        answer: 'Yes. The merging process happens entirely in your web browser. Your PDF files are never uploaded to any server.'
+      },
+      {
+        question: 'How do I change the order of the merged PDF?',
+        answer: 'After selecting your files, you can simply drag and drop them in the list to rearrange their order before clicking Merge.'
+      },
+      {
+        question: 'Is there a limit to how many PDFs I can merge?',
+        answer: 'You can merge up to 50 PDF files at once, with a maximum file size of 100MB per file.'
+      }
     ],
-    howToUse: [],
-    relatedToolIds: ['pdf-split']
+    howToUse: [
+      'Select or drag and drop multiple PDF files into the upload area.',
+      'Drag the files in the list to arrange them in your desired order.',
+      'Click the "Merge PDFs" button.',
+      'Download your combined PDF document.'
+    ],
+    relatedToolIds: ['pdf-split', 'pdf-to-images'],
+    status: 'active',
+    popular: true,
+    supportsMultipleFiles: true,
+    outputFormat: 'pdf'
   },
   {
     id: 'pdf-split',

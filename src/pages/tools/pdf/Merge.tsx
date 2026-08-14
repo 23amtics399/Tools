@@ -228,12 +228,12 @@ export default function MergePdf() {
           />
           
           {processError && (
-            <div style={{ color: '#ef4444', marginTop: '1rem', padding: '1rem', backgroundColor: '#fee2e2', borderRadius: '8px' }}>
+            <div style={{ color: 'var(--color-error)', marginTop: '1rem', padding: '1rem', backgroundColor: 'rgba(239, 68, 68, 0.1)', borderRadius: '8px' }}>
               {processError}
             </div>
           )}
           {uploadError && (
-            <div style={{ color: '#ef4444', marginTop: '1rem', padding: '1rem', backgroundColor: '#fee2e2', borderRadius: '8px' }}>
+            <div style={{ color: 'var(--color-error)', marginTop: '1rem', padding: '1rem', backgroundColor: 'rgba(239, 68, 68, 0.1)', borderRadius: '8px' }}>
               {uploadError}
             </div>
           )}
@@ -241,9 +241,9 @@ export default function MergePdf() {
       )}
 
       {result && (
-        <div style={{ padding: '2rem', textAlign: 'center', backgroundColor: '#f8fafc', borderRadius: '12px', marginTop: '2rem', border: '1px solid #e2e8f0' }}>
-          <h3 style={{ marginBottom: '1rem', color: '#0f172a' }}>Merge Complete!</h3>
-          <p style={{ marginBottom: '1.5rem', color: '#64748b' }}>
+        <div style={{ padding: '2rem', textAlign: 'center', backgroundColor: 'var(--color-elevated)', borderRadius: '12px', marginTop: '2rem', border: '1px solid var(--color-border)' }}>
+          <h3 style={{ marginBottom: '1rem', color: 'var(--color-text)' }}>Merge Complete!</h3>
+          <p style={{ marginBottom: '1.5rem', color: 'var(--color-muted)' }}>
             {result.fileName} ({(result.processedSize / 1024 / 1024).toFixed(2)} MB)
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>

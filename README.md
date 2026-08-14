@@ -25,6 +25,7 @@ A production-ready, client-side web platform for image and PDF processing utilit
 ### PDF Tools
 - PDF to Images
 - Merge PDF
+- Split PDF
 
 *(More tools marked as "Coming Soon" in the registry)*
 

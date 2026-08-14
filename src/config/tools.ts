@@ -429,14 +429,66 @@ export const TOOLS: ToolDefinition[] = [
     acceptedTypes: ['application/pdf'],
     maxFileSizeMB: 100,
     maxFiles: 1,
-    status: 'coming-soon',
+    status: 'active',
+    options: [
+      {
+        id: 'ranges',
+        label: 'Select pages to extract',
+        type: 'text',
+        defaultValue: '',
+        placeholder: 'e.g., 1-3, 5, 8-10',
+        description: 'Examples: 1-3 (pages 1 through 3), 5 (page 5), 1-3, 7 (multiple ranges). Type "all" or leave blank for all pages.'
+      },
+      {
+        id: 'mode',
+        label: 'Output Mode',
+        type: 'select',
+        defaultValue: 'combine',
+        options: [
+          { label: 'Extract selected pages into one PDF', value: 'combine' },
+          { label: 'Extract each selected page as a separate PDF (ZIP)', value: 'separate' }
+        ],
+        description: 'Choose whether to merge the extracted pages into a single new PDF or keep them separate.'
+      }
+    ],
     seo: {
       title: 'Split PDF Files Online | Tools',
-      description: 'Separate one page or a whole set of pages from a PDF document easily.',
+      description: 'Separate one page or a whole set of pages from a PDF document easily. Fast, free, and completely secure.',
       keywords: ['split pdf', 'extract pdf pages', 'separate pdf']
     },
-    faq: [],
-    howToUse: [],
+    faq: [
+      {
+        question: 'What does Split PDF do?',
+        answer: 'Split PDF allows you to extract selected pages from a PDF document. You can extract them into a single new PDF, or export each selected page as a completely separate PDF file (downloaded in a ZIP).'
+      },
+      {
+        question: 'Can I extract specific pages?',
+        answer: 'Yes. You can enter specific pages (e.g. "5"), ranges (e.g. "1-3"), or a combination (e.g. "1, 3, 5-7") to extract exactly what you need.'
+      },
+      {
+        question: 'What happens if I leave the page range empty?',
+        answer: 'If the input is empty or says "all", all pages of the document will be selected for extraction.'
+      },
+      {
+        question: 'Can I extract each page separately?',
+        answer: 'Yes! Simply select "Extract each selected page as a separate PDF (ZIP)" in the Output Mode dropdown. The selected pages will be saved individually and packaged into a ZIP archive for easy download.'
+      },
+      {
+        question: 'Are my PDF files uploaded to a server?',
+        answer: 'No. The entire process happens securely and privately within your web browser. Your PDF files are never uploaded to our servers.'
+      },
+      {
+        question: 'Can I use Split PDF for large files?',
+        answer: 'Yes, but performance depends on your device\'s memory (RAM) and web browser. Splitting very large PDFs with thousands of pages may cause your browser to slow down.'
+      }
+    ],
+    howToUse: [
+      'Upload a PDF document from your device.',
+      'Enter the pages or page ranges you want to extract, for example: 1-3, 5, 8-10.',
+      'Choose whether to create one combined PDF or separate PDFs in a ZIP.',
+      'Click the Split PDF button.',
+      'Download the resulting PDF or ZIP archive.'
+    ],
     relatedToolIds: ['pdf-merge']
   },
   {

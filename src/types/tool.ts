@@ -6,12 +6,13 @@ export interface FAQItem {
 export interface ToolOption {
   id: string;
   label: string;
-  type: 'slider' | 'select' | 'toggle' | 'number';
+  type: 'slider' | 'select' | 'toggle' | 'number' | 'text';
   defaultValue: unknown;
   min?: number;
   max?: number;
   step?: number;
   options?: { label: string; value: string | number }[];
+  placeholder?: string;
   description?: string;
 }
 

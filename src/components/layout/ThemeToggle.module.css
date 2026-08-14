@@ -1,0 +1,70 @@
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.toggleBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  background: transparent;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.toggleBtn:hover {
+  background-color: var(--color-elevated);
+}
+
+.toggleBtn svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+}
+
+.menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  z-index: 50;
+  min-width: 8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  text-align: left;
+  transition: background-color var(--transition-fast);
+}
+
+.menuItem:hover {
+  background-color: var(--color-elevated);
+}
+
+.menuItem.active {
+  color: var(--color-primary);
+  background-color: rgba(99, 102, 241, 0.1);
+}

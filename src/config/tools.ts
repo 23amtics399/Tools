@@ -519,21 +519,55 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'compress',
     category: 'pdf',
     path: '/pdf/compress',
-    description: 'Reduce the file size of your PDF documents.',
+    description: 'Reduce the file size of your PDF documents securely in your browser.',
     shortDescription: 'Reduce PDF file size',
     icon: 'pdf-compress',
     acceptedTypes: ['application/pdf'],
     maxFileSizeMB: 100,
     maxFiles: 1,
-    status: 'coming-soon',
+    status: 'active',
+    options: [
+      {
+        id: 'compressionLevel',
+        label: 'Compression Level',
+        type: 'select',
+        defaultValue: '50',
+        options: [
+          { label: 'Low — 10%', value: '10' },
+          { label: 'Light — 30%', value: '30' },
+          { label: 'Balanced — 50%', value: '50' },
+          { label: 'Strong — 70%', value: '70' },
+          { label: 'Maximum — 90%', value: '90' }
+        ],
+        description: 'Higher compression reduces file size more but may reduce quality.'
+      }
+    ],
     seo: {
-      title: 'Compress PDF Files Online | Tools',
-      description: 'Reduce the size of your PDF files securely in your browser.',
-      keywords: ['compress pdf', 'reduce pdf size']
+      title: 'Compress PDF Files Online Free | No Server Upload',
+      description: 'Reduce the size of your PDF files securely directly in your browser. Completely private, no data is uploaded to our servers.',
+      keywords: ['compress pdf', 'reduce pdf size', 'shrink pdf', 'pdf compressor free']
     },
-    faq: [],
-    howToUse: [],
-    relatedToolIds: []
+    faq: [
+      {
+        question: 'Is my data secure?',
+        answer: 'Yes! All processing happens completely locally in your browser. Your PDF files are never uploaded to our servers, ensuring total privacy.'
+      },
+      {
+        question: 'Will this make my text unselectable?',
+        answer: 'It depends on the compression level. Lower levels (10% - 30%) preserve text, fonts, and vector graphics perfectly. Higher levels (50% - 90%) may rasterize pages into images to achieve smaller file sizes, which can make text non-selectable.'
+      },
+      {
+        question: 'Why didn\'t my file size shrink?',
+        answer: 'If your PDF is already highly optimized or consists entirely of compressed images, it may not be possible to reduce its size further without ruining the quality. We never fake a compression — if we can\'t reduce the size, we preserve the original file.'
+      }
+    ],
+    howToUse: [
+      'Click or drag and drop a PDF file into the upload area.',
+      'Leave the compression level on "Recommended — Lossless".',
+      'Click "Compress PDF".',
+      'If the file can be optimized, download your new smaller PDF.'
+    ],
+    relatedToolIds: ['pdf-merge', 'pdf-split']
   },
   {
     id: 'pdf-remove-pages',

@@ -11,7 +11,7 @@ import { ProcessorResult } from '../../../types/file';
 import { FileIcon, CloseIcon } from '../../../components/icons/IconRegistry';
 
 export default function SplitPdf() {
-  const tool = useToolConfig('split');
+  const tool = useToolConfig();
   const { files, addFiles, removeFile, clearFiles, error: uploadError } = useFileUpload(tool!);
   
   const [isProcessing, setIsProcessing] = useState(false);

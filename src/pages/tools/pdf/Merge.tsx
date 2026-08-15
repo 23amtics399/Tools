@@ -11,7 +11,7 @@ import { DragHandleIcon, FileIcon, MoveUpIcon, MoveDownIcon, CloseIcon } from '.
 import styles from './Merge.module.css';
 
 export default function MergePdf() {
-  const tool = useToolConfig('merge');
+  const tool = useToolConfig();
   const { files, addFiles, removeFile, clearFiles, error: uploadError, setFiles } = useFileUpload(tool!);
   const [isProcessing, setIsProcessing] = useState(false);
   const [processProgress, setProcessProgress] = useState(0);

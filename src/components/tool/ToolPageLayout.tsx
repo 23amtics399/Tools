@@ -22,6 +22,7 @@ import ToolFAQ from './ToolFAQ';
 import PrivacyNotice from './PrivacyNotice';
 import ComingSoon from './ComingSoon';
 import ErrorMessage from '../ui/ErrorMessage';
+import { SuccessIcon, ResetIcon } from '../icons/IconRegistry';
 
 export interface ToolPageLayoutProps {
   tool: ToolDefinition;
@@ -281,7 +282,8 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
             {allDone && completedResults.length > 0 && (
               <div className={styles.results} ref={resultsRef}>
                 <h2 className={styles.resultsTitle}>
-                  ✅ {completedResults.length} file{completedResults.length > 1 ? 's' : ''} processed
+                  <SuccessIcon size={24} style={{ display: 'inline-block', verticalAlign: 'text-bottom', marginRight: '8px', color: 'var(--color-success)' }} />
+                  {completedResults.length} file{completedResults.length > 1 ? 's' : ''} processed
                   {completedResults.length > 0 && (
                     <span className={styles.savedSize}>
                       {' '}— Saved {formatFileSize(
@@ -326,7 +328,8 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
                 )}
 
                 <button className={styles.resetButton} onClick={handleReset}>
-                  ↺ Process More Files
+                  <ResetIcon size={16} style={{ display: 'inline-block', verticalAlign: 'text-bottom', marginRight: '6px' }} />
+                  Process More Files
                 </button>
               </div>
             )}

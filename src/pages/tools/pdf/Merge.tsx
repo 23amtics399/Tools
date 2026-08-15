@@ -7,6 +7,7 @@ import { useToolConfig } from '../../../hooks/useToolConfig';
 import { useFileUpload } from '../../../hooks/useFileUpload';
 import { mergePdfs } from '../../../processors';
 import { AppFile } from '../../../types/file';
+import { DragHandleIcon, FileIcon, MoveUpIcon, MoveDownIcon, CloseIcon } from '../../../components/icons/IconRegistry';
 import styles from './Merge.module.css';
 
 export default function MergePdf() {
@@ -165,9 +166,9 @@ export default function MergePdf() {
                 onDragEnd={handleDragEnd}
               >
                 <div className={styles.dragHandle} title="Drag to reorder">
-                  ↕
+                  <DragHandleIcon size={16} />
                 </div>
-                <div className={styles.icon}>📄</div>
+                <div className={styles.icon}><FileIcon size={24} /></div>
                 <div className={styles.info}>
                   <div className={styles.name}>{f.name}</div>
                   <div className={styles.meta}>
@@ -182,7 +183,7 @@ export default function MergePdf() {
                     disabled={index === 0}
                     title="Move Up"
                   >
-                    ↑
+                    <MoveUpIcon size={16} />
                   </button>
                   <button 
                     type="button"
@@ -191,7 +192,7 @@ export default function MergePdf() {
                     disabled={index === files.length - 1}
                     title="Move Down"
                   >
-                    ↓
+                    <MoveDownIcon size={16} />
                   </button>
                   <button 
                     type="button"
@@ -199,7 +200,7 @@ export default function MergePdf() {
                     onClick={() => removeFile(f.id)}
                     title="Remove"
                   >
-                    ×
+                    <CloseIcon size={16} />
                   </button>
                 </div>
               </li>

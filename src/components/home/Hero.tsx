@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBar from './SearchBar';
 import styles from './Hero.module.css';
+import { InfoIcon, ProcessingIcon, SuccessIcon } from '../icons/IconRegistry';
 
 interface HeroProps {
   onSearch: (query: string) => void;
@@ -18,15 +19,15 @@ export const Hero: React.FC<HeroProps> = ({ onSearch }) => (
 
       <div className={styles.trustIndicators}>
         <span className={styles.indicator}>
-          <span className={styles.icon}>🔒</span> Private
+          <span className={styles.icon}><InfoIcon size={16} /></span> Private
         </span>
         <span className={styles.dot}>·</span>
         <span className={styles.indicator}>
-          <span className={styles.icon}>⚡</span> Fast
+          <span className={styles.icon}><ProcessingIcon size={16} /></span> Fast
         </span>
         <span className={styles.dot}>·</span>
         <span className={styles.indicator}>
-          <span className={styles.icon}>✓</span> Free
+          <span className={styles.icon}><SuccessIcon size={16} /></span> Free
         </span>
       </div>
     </div>

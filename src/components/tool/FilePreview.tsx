@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './FilePreview.module.css';
 import { AppFile } from '../../types/file';
+import { FileIcon } from '../icons/IconRegistry';
 
 export const FilePreview: React.FC<{ file: AppFile; maxHeight?: number }> = ({ file, maxHeight = 300 }) => {
   const [url, setUrl] = useState<string | null>(null);
@@ -19,7 +20,7 @@ export const FilePreview: React.FC<{ file: AppFile; maxHeight?: number }> = ({ f
         <img src={url} alt={file.name} className={styles.image} />
       ) : (
         <div className={styles.placeholder}>
-          <span className={styles.icon}>📄</span>
+          <span className={styles.icon}><FileIcon size={48} /></span>
           <span className={styles.name}>{file.name}</span>
         </div>
       )}

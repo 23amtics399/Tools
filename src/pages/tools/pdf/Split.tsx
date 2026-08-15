@@ -8,6 +8,7 @@ import { useToolConfig } from '../../../hooks/useToolConfig';
 import { useFileUpload } from '../../../hooks/useFileUpload';
 import { splitPdf } from '../../../processors/pdf/split';
 import { ProcessorResult } from '../../../types/file';
+import { FileIcon, CloseIcon } from '../../../components/icons/IconRegistry';
 
 export default function SplitPdf() {
   const tool = useToolConfig('split');
@@ -97,7 +98,7 @@ export default function SplitPdf() {
         <div>
           <div style={{ backgroundColor: 'var(--color-elevated)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--color-border)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <div style={{ fontSize: '2rem' }}>📄</div>
+              <div style={{ color: 'var(--color-primary)' }}><FileIcon size={32} /></div>
               <div>
                 <div style={{ fontWeight: '600', color: 'var(--color-text)' }}>{files[0].name}</div>
                 <div style={{ fontSize: '0.875rem', color: 'var(--color-muted)' }}>
@@ -108,10 +109,10 @@ export default function SplitPdf() {
             </div>
             <button 
               onClick={() => removeFile(files[0].id)}
-              style={{ background: 'none', border: 'none', color: 'var(--color-error)', cursor: 'pointer', fontSize: '1.5rem' }}
+              style={{ background: 'none', border: 'none', color: 'var(--color-error)', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
               title="Remove File"
             >
-              ×
+              <CloseIcon size={24} />
             </button>
           </div>
 

@@ -4,6 +4,7 @@ import { convertPdfToImages } from '../../../processors/pdf/pdfToImages';
 import ToolPageLayout from '../../../components/tool/ToolPageLayout';
 import { ProcessorResult, AppFile } from '../../../types/file';
 import { downloadFile } from '../../../lib/downloadHelper';
+import { SuccessIcon, ProcessingIcon, DownloadAllIcon, ViewIcon, DownloadIcon, CloseIcon } from '../../../components/icons/IconRegistry';
 import styles from './PdfToImages.module.css';
 
 const tool = getToolById('pdf-to-images')!;
@@ -50,13 +51,20 @@ export default function PdfToImagesPage() {
     return (
       <div className={styles.container}>
         <div className={styles.header}>
-          <p className={styles.successMessage}>✅ PDF converted successfully</p>
+          <p className={styles.successMessage}>
+            <SuccessIcon size={20} style={{ display: 'inline-block', verticalAlign: 'text-bottom', marginRight: '6px' }} />
+            PDF converted successfully
+          </p>
           <button
             className={styles.downloadAllBtn}
             onClick={() => handleDownloadAll(allPages)}
             disabled={isZipping}
           >
-            {isZipping ? '⏳ Zipping...' : `📥 Download All (${allPages.length} images)`}
+            {isZipping ? (
+              <><ProcessingIcon size={16} style={{ display: 'inline-block', verticalAlign: 'text-bottom', marginRight: '6px' }} /> Zipping...</>
+            ) : (
+              <><DownloadAllIcon size={16} style={{ display: 'inline-block', verticalAlign: 'text-bottom', marginRight: '6px' }} /> Download All ({allPages.length} images)</>
+            )}
           </button>
         </div>
 
@@ -72,14 +80,14 @@ export default function PdfToImagesPage() {
                   className={styles.actionBtn}
                   onClick={() => setViewingImage(page.previewUrl)}
                 >
-                  👁 View
+                  <ViewIcon size={16} style={{ display: 'inline-block', verticalAlign: 'text-bottom', marginRight: '4px' }} /> View
                 </button>
                 <a
                   href={page.previewUrl}
                   download={page.fileName}
                   className={styles.actionLink}
                 >
-                  📥 DL
+                  <DownloadIcon size={16} style={{ display: 'inline-block', verticalAlign: 'text-bottom', marginRight: '4px' }} /> DL
                 </a>
               </div>
             </div>
@@ -89,7 +97,9 @@ export default function PdfToImagesPage() {
         {viewingImage && (
           <div className={styles.modalBackdrop} onClick={() => setViewingImage(null)}>
             <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
-              <button className={styles.modalClose} onClick={() => setViewingImage(null)}>×</button>
+              <button className={styles.modalClose} onClick={() => setViewingImage(null)}>
+                <CloseIcon size={24} />
+              </button>
               <img src={viewingImage} alt="Full resolution" className={styles.modalImage} />
             </div>
           </div>

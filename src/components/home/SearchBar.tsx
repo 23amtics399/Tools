@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './SearchBar.module.css';
 import { ToolDefinition } from '../../types/tool';
+import { ToolIcon } from '../icons/ToolIcon';
 
 interface SearchBarProps { onSearch?: (q: string) => void; results?: ToolDefinition[]; }
 
@@ -27,7 +28,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, results = [] }) 
         <div className={styles.dropdown}>
           {results.map(r => (
             <Link to={r.path} key={r.id} className={styles.resultItem}>
-              <span className={styles.resultIcon}>{r.icon}</span>
+              <span className={styles.resultIcon}><ToolIcon name={r.icon} /></span>
               <div>
                 <div className={styles.resultName}>{r.name}</div>
                 <div className={styles.resultDesc}>{r.shortDescription}</div>

@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import styles from './FileUploadZone.module.css';
+import { UploadIcon } from '../icons/IconRegistry';
 
 export const FileUploadZone: React.FC<{ onFiles: (f: File[]) => void; acceptedTypes: string[]; maxFiles: number; maxSizeMB: number; disabled?: boolean }> = ({ onFiles, acceptedTypes, maxFiles, maxSizeMB, disabled }) => {
   const [drag, setDrag] = useState(false);
@@ -19,7 +20,7 @@ export const FileUploadZone: React.FC<{ onFiles: (f: File[]) => void; acceptedTy
       onClick={() => !disabled && inputRef.current?.click()}
     >
       <input ref={inputRef} type="file" multiple={maxFiles > 1} accept={acceptedTypes.join(',')} className={styles.input} onChange={e => { if (e.target.files) onFiles(Array.from(e.target.files)); }} />
-      <div className={styles.icon}>☁️</div>
+      <div className={styles.icon}><UploadIcon size={48} /></div>
       <h3 className={styles.text}>Drop files here or click to upload</h3>
       <p className={styles.subtext}>Accepted: {acceptedTypes.join(', ')} (Max {maxSizeMB}MB)</p>
     </div>

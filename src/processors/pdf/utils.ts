@@ -126,3 +126,87 @@ export function stringifyRanges(pageIndices: Iterable<number>): string {
 
   return ranges.join(", ");
 }
+
+/**
+ * Gets the font size in points based on the selected option string.
+ */
+export function getFontSizeForOption(fontSizeOption: string): number {
+  if (fontSizeOption === 'small') return 10;
+  if (fontSizeOption === 'large') return 16;
+  return 12; // medium
+}
+
+/**
+ * Gets the margin in points based on the selected option string.
+ */
+export function getMarginForOption(marginOption: string): number {
+  if (marginOption === 'small') return 15;
+  if (marginOption === 'large') return 45;
+  return 30; // medium
+}
+
+/**
+ * Calculates the visual coordinates (vx, vy) for rendering text over a PDF page.
+ * NOTE: The origin (0, 0) is at the BOTTOM-LEFT of the visual bounding box.
+ * 
+ * @param position The 3x3 position string (e.g. 'bottom-center', 'top-left')
+ * @param visualW The visual width of the page in points
+ * @param visualH The visual height of the page in points
+ * @param textWidth The width of the text in points
+ * @param textHeight The height of the text in points
+ * @param margin The margin distance from edges in points
+ * @returns The bottom-left origin coordinates { vx, vy } in points.
+ */
+export function calculateVisualPosition(
+  position: string,
+  visualW: number,
+  visualH: number,
+  textWidth: number,
+  textHeight: number,
+  margin: number,
+  customPosition?: { x: number; y: number }
+): { vx: number; vy: number } {
+  let vx = 0;
+  let vy = 0;
+  
+  if (position === 'custom' && customPosition) {
+    // customPosition.x and customPosition.y are center point ratios (0 to 1) 
+    // from the top-left visual corner (standard DOM coordinate system).
+    // Convert to PDF coordinate system (bottom-left origin).
+    const centerX = customPosition.x * visualW;
+    const centerY = (1 - customPosition.y) * visualH;
+    
+    // Text drawing origin in PDF is bottom-left
+    vx = centerX - (textWidth / 2);
+    vy = centerY - (textHeight / 2);
+    
+    // Clamp to ensure the text stays completely inside the page boundaries
+    const maxVx = visualW - textWidth;
+    const maxVy = visualH - textHeight;
+    vx = Math.max(0, Math.min(vx, maxVx));
+    vy = Math.max(0, Math.min(vy, maxVy));
+    
+    return { vx, vy };
+  }
+
+  
+  // Calculate X (from left)
+  if (position.includes('left')) {
+    vx = margin;
+  } else if (position.includes('right')) {
+    vx = visualW - margin - textWidth;
+  } else { // center
+    vx = (visualW - textWidth) / 2;
+  }
+  
+  // Calculate Y (from bottom)
+  if (position.includes('bottom')) {
+    vy = margin;
+  } else if (position.includes('top')) {
+    vy = visualH - margin - textHeight;
+  } else { // middle
+    vy = (visualH - textHeight) / 2;
+  }
+  
+  return { vx, vy };
+}

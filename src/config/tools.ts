@@ -672,15 +672,34 @@ export const TOOLS: ToolDefinition[] = [
     acceptedTypes: ['application/pdf'],
     maxFileSizeMB: 100,
     maxFiles: 1,
-    status: 'coming-soon',
+    status: 'active',
     seo: {
       title: 'Add Page Numbers to PDF Online | Tools',
-      description: 'Insert page numbers into your PDF document easily.',
-      keywords: ['pdf page numbers', 'add numbers to pdf']
+      description: 'Insert page numbers into your PDF document easily. Fast, local processing with customizable position and format.',
+      keywords: ['pdf page numbers', 'add numbers to pdf', 'paginate pdf', 'pdf numbering tool']
     },
-    faq: [],
-    howToUse: [],
-    relatedToolIds: []
+    faq: [
+      {
+        question: 'Are my PDF files safe?',
+        answer: 'Yes! Your files are processed entirely in your browser using local resources. They are never uploaded to any server.'
+      },
+      {
+        question: 'Can I number only specific pages?',
+        answer: 'Yes, you can enter a specific page range (e.g., 1, 3, 5-10) to only add numbers to those pages.'
+      },
+      {
+        question: 'Does this ruin my selectable text?',
+        answer: 'No. The numbers are embedded natively as vector text, so your original PDF remains completely intact, searchable, and selectable.'
+      }
+    ],
+    howToUse: [
+      'Upload the PDF you want to number.',
+      'Configure the page range, position, format, and starting number.',
+      'Use the visual preview to verify your settings.',
+      'Click "Add Page Numbers" to process.',
+      'Download your updated PDF.'
+    ],
+    relatedToolIds: ['pdf-merge', 'pdf-remove-pages']
   },
 
   // OTHER TOOLS

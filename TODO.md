@@ -4,6 +4,7 @@
 - [x] Implement V2 PDF Merge using `pdf-lib`.
 - [x] Implement V2 PDF Split.
 - [x] Implement V2 PDF Tools (Rotate, Compress, Remove Pages) using `pdf-lib`.
+- [x] Implement PDF Page Numbering.
 - [ ] Implement HEIC Converter using `libheif-js` or alternative WASM build.
 - [ ] Setup analytics (Google Analytics or privacy-friendly alternative like Plausible) for usage tracking.
 - [ ] Create missing icons and graphics for SEO metadata tags.

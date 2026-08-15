@@ -1,0 +1,151 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  width: 100%;
+  max-width: 1000px;
+  height: 100%;
+  max-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.header h3 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btnSecondary {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btnSecondary:hover {
+  background: var(--color-surface-hover);
+}
+
+.btnPrimary {
+  padding: 0.5rem 1.25rem;
+  border: none;
+  background: var(--color-primary);
+  color: white;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btnPrimary:hover {
+  background: var(--color-primary-hover);
+}
+
+.btnPrimary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg);
+  min-height: 0; /* needed for flex child overflow */
+  overflow-y: auto; /* allow the entire content area to scroll if viewport is extremely tiny */
+  padding: 1.5rem;
+}
+
+.hint {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.previewWrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0; /* needed for internal scaling */
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: auto; /* allows scrolling the PDF if it exceeds viewport */
+  position: relative;
+  /* We remove padding here because we compute available size explicitly in JS, 
+     but we subtracted 32px to act as padding for the container */
+}
+
+.pdfContainer {
+  position: relative;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+  background-color: #fff;
+  flex-shrink: 0; /* important: forces wrapper to scroll if container > wrapper */
+  /* center it within flex if it exceeds by using margin: auto */
+  margin: auto;
+}
+
+.interactiveLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none; /* Prevent browser scrolling on touch devices while dragging */
+  pointer-events: auto; /* Required because parent from PdfThumbnail has pointer-events: none */
+}
+
+.interactiveLayer:active {
+  cursor: grabbing;
+}
+
+.textOverlay {
+  pointer-events: none; /* Let events pass to the interactive layer */
+  user-select: none;
+  transition: left 0.05s ease-out, top 0.05s ease-out; /* Smooth snapping if clicking */
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8), 0 0 2px rgba(255, 255, 255, 0.9);
+}
+
+.dragging {
+  transition: none; /* No transition while actively dragging */
+}

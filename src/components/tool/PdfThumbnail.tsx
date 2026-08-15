@@ -4,7 +4,9 @@ import type { PDFDocumentProxy } from 'pdfjs-dist';
 interface PdfThumbnailProps {
   pdf: PDFDocumentProxy;
   pageIndex: number; // 1-indexed
-  mode?: 'rotate' | 'select';
+  mode?: 'rotate' | 'select' | 'preview' | 'editor';
+  width?: number; // Base width for the thumbnail (default: 150)
+  children?: React.ReactNode; // Overlay components
   
   // Rotate mode props
   additionalRotation?: number;
@@ -14,6 +16,9 @@ interface PdfThumbnailProps {
   // Select mode props
   isSelected?: boolean;
   onToggleSelect?: () => void;
+
+  // Render callback
+  onRender?: (unscaledDimensions: { w: number; h: number }) => void;
 }
 
 export function PdfThumbnail({
@@ -24,17 +29,24 @@ export function PdfThumbnail({
   onRotateCw,
   onRotateCcw,
   isSelected = false,
-  onToggleSelect
+  onToggleSelect,
+  width = 150,
+  onRender,
+  children
 }: PdfThumbnailProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isVisible, setIsVisible] = useState(true); // Temporarily true
   const [isRendered, setIsRendered] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [dimensions, setDimensions] = useState({ w: 150, h: 212 });
+  // Default aspect ratio for A4 portrait is roughly 1:1.414. We seed it with `width` based dimensions.
+  const [dimensions, setDimensions] = useState({ w: width, h: width * 1.414 });
+  const [unscaledDimensions, setUnscaledDimensions] = useState({ w: width, h: width * 1.414 });
+  const [visualScale, setVisualScale] = useState<number | null>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!isVisible || isRendered || error) return;
+    if (!isVisible || !pdf) return;
     if (!canvasRef.current) {
       console.log(`Canvas ref is null for page ${pageIndex}`);
       return;
@@ -42,15 +54,19 @@ export function PdfThumbnail({
 
     let isCancelled = false;
     
+    // Reset state for new render
+    setIsRendered(false);
+    setError(null);
+    
     const renderPage = async () => {
       try {
         console.log(`Rendering page ${pageIndex}...`);
         const page = await pdf.getPage(pageIndex);
         if (isCancelled) return;
         
-        // Render at a fixed width of 150px for consistency and low memory usage
+        // Render at a fixed width for consistency and low memory usage
         const unscaledViewport = page.getViewport({ scale: 1 });
-        const scale = 150 / unscaledViewport.width;
+        const scale = width / unscaledViewport.width;
         const viewport = page.getViewport({ scale });
         
         const canvas = canvasRef.current;
@@ -66,6 +82,11 @@ export function PdfThumbnail({
         canvas.width = viewport.width;
         canvas.height = viewport.height;
         setDimensions({ w: viewport.width, h: viewport.height });
+        setUnscaledDimensions({ w: unscaledViewport.width, h: unscaledViewport.height });
+        
+        if (onRender) {
+          onRender({ w: unscaledViewport.width, h: unscaledViewport.height });
+        }
         
         await page.render({ canvasContext: ctx, viewport, canvas }).promise;
         
@@ -86,7 +107,21 @@ export function PdfThumbnail({
     return () => {
       isCancelled = true;
     };
-  }, [isVisible, isRendered, pdf, pageIndex]);
+  }, [isVisible, pdf, pageIndex, width]);
+
+  // Track visual scale for responsive resizing (especially in preview mode)
+  useEffect(() => {
+    if (!wrapperRef.current) return;
+    const ro = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.contentRect.width > 0 && unscaledDimensions.w > 0) {
+          setVisualScale(entry.contentRect.width / unscaledDimensions.w);
+        }
+      }
+    });
+    ro.observe(wrapperRef.current);
+    return () => ro.disconnect();
+  }, [unscaledDimensions.w]);
 
   const isRotated = Math.abs(additionalRotation) % 180 === 90;
   const wrapperWidth = isRotated ? dimensions.h : dimensions.w;
@@ -99,12 +134,19 @@ export function PdfThumbnail({
   };
 
   const isSelectMode = mode === 'select';
+  const isEditorMode = mode === 'editor';
 
-  return (
-    <div 
-      ref={containerRef} 
-      onClick={handleContainerClick}
-      style={{ 
+  // If we are in editor mode, we want a completely bare container that strictly wraps the canvas.
+  const containerStyle: React.CSSProperties = isEditorMode 
+    ? {
+        position: 'relative',
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }
+    : { 
         display: 'flex', 
         flexDirection: 'column', 
         alignItems: 'center', 
@@ -118,16 +160,27 @@ export function PdfThumbnail({
         position: 'relative',
         transition: 'all 0.2s ease',
         opacity: isSelectMode && isSelected ? 0.8 : 1,
-      }}
+      };
+
+  return (
+    <div 
+      ref={containerRef} 
+      onClick={handleContainerClick}
+      style={containerStyle}
     >
-      <div style={{
-        width: `${wrapperWidth}px`,
-        height: `${wrapperHeight}px`,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
-        transition: 'width 0.3s ease, height 0.3s ease',
+      <div 
+        ref={wrapperRef}
+        style={{
+          width: (mode === 'preview' || isEditorMode) ? '100%' : `${wrapperWidth}px`,
+          height: (mode === 'preview' || isEditorMode) ? '100%' : `${wrapperHeight}px`,
+          maxWidth: (mode === 'preview' || isEditorMode) ? '100%' : 'none',
+          maxHeight: (mode === 'preview' || isEditorMode) ? '100%' : 'none',
+          aspectRatio: `${wrapperWidth} / ${wrapperHeight}`,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          position: 'relative',
+          transition: 'width 0.3s ease, height 0.3s ease',
       }}>
         {!isRendered && !error && (
           <div style={{ position: 'absolute', color: 'var(--color-muted)', fontSize: '0.875rem' }}>
@@ -144,14 +197,17 @@ export function PdfThumbnail({
         <canvas 
           ref={canvasRef}
           style={{
-            width: `${dimensions.w}px`,
-            height: `${dimensions.h}px`,
+            width: (mode === 'preview' || isEditorMode) ? '100%' : `${dimensions.w}px`,
+            height: (mode === 'preview' || isEditorMode) ? '100%' : `${dimensions.h}px`,
+            maxWidth: '100%',
+            maxHeight: '100%',
+            objectFit: mode === 'preview' ? 'contain' : 'fill',
             opacity: isRendered ? 1 : 0,
             transition: 'transform 0.3s ease-in-out',
             transform: `rotate(${additionalRotation}deg)`,
             transformOrigin: 'center center',
             backgroundColor: '#ffffff', // PDFs look best with white background
-            boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+            boxShadow: isEditorMode ? 'none' : '0 2px 8px rgba(0,0,0,0.1)'
           }}
         />
 
@@ -187,11 +243,38 @@ export function PdfThumbnail({
             </div>
           </div>
         )}
+
+        {/* Custom children overlay (used for features like page numbering preview) */}
+        {children && (
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            zIndex: 20,
+            pointerEvents: 'none'
+          }}>
+            {/* Provide context variables via CSS custom properties for children to use */}
+              <div 
+              style={{ 
+                position: 'relative', 
+                width: '100%', 
+                height: '100%',
+                // Pass the scaling factor down as a custom property for perfect DOM-to-PDF sizing
+                '--pdf-scale': visualScale !== null ? visualScale : (dimensions.w / unscaledDimensions.w),
+                '--pdf-original-width': unscaledDimensions.w,
+                '--pdf-original-height': unscaledDimensions.h,
+              } as React.CSSProperties}
+            >
+              {children}
+            </div>
+          </div>
+        )}
       </div>
       
-      <div style={{ fontSize: '0.875rem', fontWeight: '500', color: isSelectMode && isSelected ? 'var(--color-error)' : 'var(--color-text)' }}>
-        Page {pageIndex} {isSelectMode && isSelected && '(Remove)'}
-      </div>
+      {!isEditorMode && mode !== 'preview' && (
+        <div style={{ fontSize: '0.875rem', fontWeight: '500', color: isSelectMode && isSelected ? 'var(--color-error)' : 'var(--color-text)' }}>
+          Page {pageIndex} {isSelectMode && isSelected && '(Remove)'}
+        </div>
+      )}
       
       {mode === 'rotate' && (
         <div style={{ display: 'flex', gap: '0.5rem' }}>

@@ -29,6 +29,7 @@ A production-ready, client-side web platform for image and PDF processing utilit
 - Rotate PDF
 - Compress PDF
 - Remove PDF Pages
+- PDF Page Numbering
 
 *(More tools marked as "Coming Soon" in the registry)*
 

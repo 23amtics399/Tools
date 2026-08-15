@@ -2,57 +2,7 @@ import { PDFDocument } from 'pdf-lib';
 import JSZip from 'jszip';
 import { ProcessorFn, ProcessorResult } from '../../types/file';
 
-/**
- * Parses a page range string like "1-3, 5, 8-10" into an array of 1-based page numbers.
- */
-function parseRanges(rangesStr: string, totalPages: number): number[] {
-  const str = rangesStr.trim().toLowerCase();
-  if (!str || str === 'all') {
-    return Array.from({ length: totalPages }, (_, i) => i + 1);
-  }
-
-  const pages: number[] = [];
-  const parts = str.split(',').map(p => p.trim()).filter(Boolean);
-
-  for (const part of parts) {
-    if (part.includes('-')) {
-      const [startStr, endStr] = part.split('-');
-      const start = parseInt(startStr, 10);
-      const end = parseInt(endStr, 10);
-      
-      if (!isNaN(start) && !isNaN(end)) {
-        const min = Math.min(start, end);
-        const max = Math.max(start, end);
-        // Add all pages in range
-        for (let i = min; i <= max; i++) {
-          pages.push(i);
-        }
-      }
-    } else {
-      const page = parseInt(part, 10);
-      if (!isNaN(page)) {
-        pages.push(page);
-      }
-    }
-  }
-
-  // Filter out duplicates and out-of-bounds, but preserve requested order for valid pages
-  // Note: users might want duplicates or specific orders? The requirements said "preserve exact order specified".
-  // The unique filtering isn't strictly requested to remove duplicates, but usually users don't want duplicates.
-  // Wait, the prompt says "preserve exact page order specified by the user".
-  // Let's filter out only out of bounds pages.
-  const validPages = pages.filter(p => p >= 1 && p <= totalPages);
-  
-  // Return unique pages preserving first seen order
-  const uniquePages = Array.from(new Set(validPages));
-  
-  if (uniquePages.length === 0) {
-    // Fallback if they entered garbage
-    return Array.from({ length: totalPages }, (_, i) => i + 1);
-  }
-  
-  return uniquePages;
-}
+import { parseRanges } from './utils';
 
 export const splitPdf: ProcessorFn = async (file, options, onProgress) => {
   const ranges = (options.ranges as string) || 'all';

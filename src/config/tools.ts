@@ -497,21 +497,72 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'rotate',
     category: 'pdf',
     path: '/pdf/rotate',
-    description: 'Rotate PDF pages to exactly how you want them.',
+    description: 'Rotate PDF pages securely in your browser without uploading to any server.',
     shortDescription: 'Rotate PDF pages',
     icon: 'pdf-rotate',
     acceptedTypes: ['application/pdf'],
     maxFileSizeMB: 100,
     maxFiles: 1,
-    status: 'coming-soon',
+    status: 'active',
+    options: [
+      {
+        id: 'rotation',
+        label: 'Rotation Angle',
+        type: 'select',
+        defaultValue: '90',
+        options: [
+          { label: '90° Clockwise', value: '90' },
+          { label: '180°', value: '180' },
+          { label: '270° Clockwise', value: '270' }
+        ]
+      },
+      {
+        id: 'applyTo',
+        label: 'Apply to',
+        type: 'select',
+        defaultValue: 'all',
+        options: [
+          { label: 'All pages', value: 'all' },
+          { label: 'Specific pages', value: 'specific' }
+        ]
+      },
+      {
+        id: 'ranges',
+        label: 'Pages to rotate',
+        type: 'text',
+        defaultValue: '',
+        placeholder: 'e.g., 1-3, 5, 8-10',
+        description: 'Leave blank to rotate all pages. Example: 1-3 (pages 1 through 3), 5 (page 5).'
+      }
+    ],
     seo: {
       title: 'Rotate PDF Pages Online | Tools',
-      description: 'Rotate individual pages or entire PDF documents easily.',
-      keywords: ['rotate pdf', 'turn pdf pages']
+      description: 'Rotate individual pages or entire PDF documents easily. Completely free and secure, processed entirely in your web browser.',
+      keywords: ['rotate pdf', 'turn pdf pages', 'change pdf orientation', 'rotate pdf online free']
     },
-    faq: [],
-    howToUse: [],
-    relatedToolIds: []
+    faq: [
+      {
+        question: 'Are my PDF files uploaded to a server?',
+        answer: 'No. The entire rotation process happens securely and privately within your web browser. Your PDF files are never uploaded to our servers.'
+      },
+      {
+        question: 'Can I rotate only specific pages?',
+        answer: 'Yes! Select "Specific pages" in the "Apply to" dropdown, and then enter the page numbers or ranges (e.g., "1-3, 5") you wish to rotate.'
+      },
+      {
+        question: 'Will this change the quality of my PDF?',
+        answer: 'No, this tool only modifies the rotation metadata of the pages. The original quality, text, and images are perfectly preserved.'
+      }
+    ],
+    howToUse: [
+      'Upload a PDF document from your device.',
+      'Select the rotation angle: 90° Clockwise, 180°, or 270° Clockwise.',
+      'Choose whether to apply the rotation to all pages or specific pages.',
+      'If specific, enter the page numbers to rotate.',
+      'Click the Rotate PDF button.',
+      'Download your rotated PDF file.'
+    ],
+    relatedToolIds: ['pdf-split', 'pdf-merge']
   },
   {
     id: 'pdf-compress',

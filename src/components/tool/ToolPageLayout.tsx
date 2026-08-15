@@ -31,6 +31,7 @@ export interface ToolPageLayoutProps {
   renderCustomUpload?: (files: AppFile[], addFiles: (files: File[]) => void) => React.ReactNode;
   renderCustomResult?: (results: ProcessorResult[], files: AppFile[]) => React.ReactNode;
   children?: React.ReactNode;
+  isResultView?: boolean;
 }
 
 function initOptions(tool: ToolDefinition): Record<string, unknown> {
@@ -50,6 +51,7 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
   renderCustomUpload,
   renderCustomResult,
   children,
+  isResultView,
 }) => {
   const [files, setFiles] = useState<AppFile[]>([]);
   const [options, setOptions] = useState<Record<string, unknown>>(() => initOptions(tool));
@@ -58,6 +60,13 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [isDone, setIsDone] = useState(false);
   const resultsRef = React.useRef<HTMLDivElement>(null);
+
+  // Centralized scroll reset for result transitions
+  useEffect(() => {
+    if (isDone || isResultView) {
+      window.scrollTo(0, 0);
+    }
+  }, [isDone, isResultView]);
 
   // Clean up all object URLs on unmount
   useEffect(() => {
@@ -153,13 +162,6 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
 
     setIsProcessing(false);
     setIsDone(true);
-    
-    // Scroll to results after a short delay to let the DOM update
-    setTimeout(() => {
-      if (resultsRef.current) {
-        resultsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 100);
   }, [files, options, processorFn]);
 
   const handleReset = useCallback(() => {

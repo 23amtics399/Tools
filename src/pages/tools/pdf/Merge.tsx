@@ -134,7 +134,7 @@ export default function MergePdf() {
   };
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} isResultView={!!result}>
       {files.length === 0 && !result && (
         <>
           <FileUploadZone 

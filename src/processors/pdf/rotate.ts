@@ -3,15 +3,6 @@ import { ProcessorFn } from '../../types/file';
 import { parseRanges } from './utils';
 
 export const rotatePdf: ProcessorFn = async (file, options, onProgress) => {
-  const rotationStr = (options.rotation as string) || '90';
-  const applyTo = (options.applyTo as string) || 'all';
-  const ranges = (options.ranges as string) || '';
-
-  const rotationAngle = parseInt(rotationStr, 10);
-  if (isNaN(rotationAngle) || ![90, 180, 270].includes(rotationAngle)) {
-    throw new Error('Invalid rotation angle.');
-  }
-
   const arrayBuffer = await file.arrayBuffer();
   
   let sourcePdf: PDFDocument;
@@ -29,40 +20,71 @@ export const rotatePdf: ProcessorFn = async (file, options, onProgress) => {
     throw new Error('This PDF has no pages.');
   }
 
-  let selectedPages: number[] = [];
-  if (applyTo === 'all') {
-    selectedPages = Array.from({ length: totalPages }, (_, i) => i + 1);
-  } else {
-    try {
-      selectedPages = parseRanges(ranges, totalPages);
-    } catch (err: any) {
-      // Re-throw with clean error message
-      throw new Error(err.message);
-    }
-  }
-
-  if (selectedPages.length === 0) {
-    throw new Error('No valid pages selected to rotate.');
-  }
-
-  const pageIndices = selectedPages.map(p => p - 1);
-
+  const pageRotations = options.pageRotations as Record<number, number> | undefined;
+  
   if (onProgress) onProgress(20);
 
-  // Apply rotation
-  for (let i = 0; i < pageIndices.length; i++) {
-    const pageIndex = pageIndices[i];
-    const page = sourcePdf.getPage(pageIndex);
-    
-    // getRotation returns an object { angle: number, type: RotationTypes }
-    // We add the new angle to the existing one and normalize it.
-    const currentAngle = page.getRotation().angle;
-    const newAngle = (currentAngle + rotationAngle) % 360;
-    
-    page.setRotation(degrees(newAngle));
+  if (pageRotations) {
+    // Visual Rotate Mode
+    for (let i = 0; i < totalPages; i++) {
+      const additionalRotation = pageRotations[i] || 0;
+      if (additionalRotation !== 0) {
+        const page = sourcePdf.getPage(i);
+        const currentAngle = page.getRotation().angle;
+        // The effective final rotation must be:
+        // effectiveRotation = (originalPdfRotation + additionalRotation) % 360
+        // We normalize negative numbers:
+        let newAngle = (currentAngle + additionalRotation) % 360;
+        if (newAngle < 0) newAngle += 360;
+        
+        page.setRotation(degrees(newAngle));
+      }
+      
+      if (onProgress && i % 10 === 0) {
+        onProgress(20 + ((i / totalPages) * 40));
+      }
+    }
+  } else {
+    // Quick Rotate Mode
+    const rotationStr = (options.rotation as string) || '90';
+    const applyTo = (options.applyTo as string) || 'all';
+    const ranges = (options.ranges as string) || '';
 
-    if (onProgress && i % 10 === 0) {
-      onProgress(20 + ((i / pageIndices.length) * 40));
+    const rotationAngle = parseInt(rotationStr, 10);
+    if (isNaN(rotationAngle) || ![90, 180, 270].includes(rotationAngle)) {
+      throw new Error('Invalid rotation angle.');
+    }
+
+    let selectedPages: number[] = [];
+    if (applyTo === 'all') {
+      selectedPages = Array.from({ length: totalPages }, (_, i) => i + 1);
+    } else {
+      try {
+        selectedPages = parseRanges(ranges, totalPages);
+      } catch (err: any) {
+        throw new Error(err.message);
+      }
+    }
+
+    if (selectedPages.length === 0) {
+      throw new Error('No valid pages selected to rotate.');
+    }
+
+    const pageIndices = selectedPages.map(p => p - 1);
+
+    for (let i = 0; i < pageIndices.length; i++) {
+      const pageIndex = pageIndices[i];
+      const page = sourcePdf.getPage(pageIndex);
+      
+      const currentAngle = page.getRotation().angle;
+      let newAngle = (currentAngle + rotationAngle) % 360;
+      if (newAngle < 0) newAngle += 360;
+      
+      page.setRotation(degrees(newAngle));
+
+      if (onProgress && i % 10 === 0) {
+        onProgress(20 + ((i / pageIndices.length) * 40));
+      }
     }
   }
 

@@ -632,15 +632,33 @@ export const TOOLS: ToolDefinition[] = [
     acceptedTypes: ['application/pdf'],
     maxFileSizeMB: 100,
     maxFiles: 1,
-    status: 'coming-soon',
+    status: 'active',
     seo: {
-      title: 'Remove Pages from PDF Online | Tools',
-      description: 'Quickly remove unwanted pages from your PDF files.',
-      keywords: ['remove pdf pages', 'delete pdf pages']
+      title: 'Remove Pages from PDF Online Free | No Server Upload',
+      description: 'Quickly remove unwanted pages from your PDF files directly in your browser. Completely private, no data is uploaded to our servers.',
+      keywords: ['remove pdf pages', 'delete pdf pages', 'extract pdf pages']
     },
-    faq: [],
-    howToUse: [],
-    relatedToolIds: ['pdf-split']
+    faq: [
+      {
+        question: 'Is my data secure?',
+        answer: 'Yes! All processing happens completely locally in your browser. Your PDF files are never uploaded to our servers, ensuring total privacy.'
+      },
+      {
+        question: 'Will this affect the quality of my PDF?',
+        answer: 'No. This tool only removes the pages you select and leaves the rest of the document completely untouched. Text remains selectable and image quality is perfectly preserved.'
+      },
+      {
+        question: 'Can I remove all pages?',
+        answer: 'You must keep at least one page in your document. You cannot remove every page.'
+      }
+    ],
+    howToUse: [
+      'Click or drag and drop a PDF file into the upload area.',
+      'Visually select the pages you want to remove by clicking their thumbnails.',
+      'Click "Remove Pages".',
+      'Download your new PDF document.'
+    ],
+    relatedToolIds: ['pdf-split', 'pdf-merge', 'pdf-rotate']
   },
   {
     id: 'pdf-page-numbering',

@@ -87,3 +87,42 @@ export function parseRanges(rangesStr: string, totalPages: number): number[] {
   
   return uniquePages;
 }
+
+/**
+ * Converts a set or array of 0-indexed page numbers into a compressed 1-indexed range string.
+ * Example: [0, 1, 2, 4, 6, 7] -> "1-3, 5, 7-8"
+ * 
+ * @param pageIndices Array or Set of 0-indexed page numbers
+ * @returns A formatted string of ranges
+ */
+export function stringifyRanges(pageIndices: Iterable<number>): string {
+  const sorted = Array.from(pageIndices).sort((a, b) => a - b);
+  if (sorted.length === 0) return "";
+
+  const ranges: string[] = [];
+  let start = sorted[0];
+  let end = sorted[0];
+
+  for (let i = 1; i < sorted.length; i++) {
+    if (sorted[i] === end + 1) {
+      end = sorted[i];
+    } else {
+      if (start === end) {
+        ranges.push(`${start + 1}`);
+      } else {
+        ranges.push(`${start + 1}-${end + 1}`);
+      }
+      start = sorted[i];
+      end = sorted[i];
+    }
+  }
+
+  // Handle the last range
+  if (start === end) {
+    ranges.push(`${start + 1}`);
+  } else {
+    ranges.push(`${start + 1}-${end + 1}`);
+  }
+
+  return ranges.join(", ");
+}

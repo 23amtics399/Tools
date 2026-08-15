@@ -4,17 +4,27 @@ import type { PDFDocumentProxy } from 'pdfjs-dist';
 interface PdfThumbnailProps {
   pdf: PDFDocumentProxy;
   pageIndex: number; // 1-indexed
-  additionalRotation: number;
-  onRotateCw: () => void;
-  onRotateCcw: () => void;
+  mode?: 'rotate' | 'select';
+  
+  // Rotate mode props
+  additionalRotation?: number;
+  onRotateCw?: () => void;
+  onRotateCcw?: () => void;
+
+  // Select mode props
+  isSelected?: boolean;
+  onToggleSelect?: () => void;
 }
 
 export function PdfThumbnail({
   pdf,
   pageIndex,
-  additionalRotation,
+  mode = 'rotate',
+  additionalRotation = 0,
   onRotateCw,
-  onRotateCcw
+  onRotateCcw,
+  isSelected = false,
+  onToggleSelect
 }: PdfThumbnailProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -82,8 +92,34 @@ export function PdfThumbnail({
   const wrapperWidth = isRotated ? dimensions.h : dimensions.w;
   const wrapperHeight = isRotated ? dimensions.w : dimensions.h;
 
+  const handleContainerClick = () => {
+    if (mode === 'select' && onToggleSelect) {
+      onToggleSelect();
+    }
+  };
+
+  const isSelectMode = mode === 'select';
+
   return (
-    <div ref={containerRef} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', width: '100%', padding: '1rem', backgroundColor: 'var(--color-surface)', borderRadius: '8px', border: '1px solid var(--color-border)' }}>
+    <div 
+      ref={containerRef} 
+      onClick={handleContainerClick}
+      style={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        gap: '0.75rem', 
+        width: '100%', 
+        padding: '1rem', 
+        backgroundColor: 'var(--color-surface)', 
+        borderRadius: '8px', 
+        border: isSelectMode && isSelected ? '2px solid var(--color-error)' : '2px solid var(--color-border)',
+        cursor: isSelectMode ? 'pointer' : 'default',
+        position: 'relative',
+        transition: 'all 0.2s ease',
+        opacity: isSelectMode && isSelected ? 0.8 : 1,
+      }}
+    >
       <div style={{
         width: `${wrapperWidth}px`,
         height: `${wrapperHeight}px`,
@@ -118,34 +154,69 @@ export function PdfThumbnail({
             boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
           }}
         />
+
+        {/* Overlay for selected state in select mode */}
+        {isSelectMode && isSelected && (
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            backgroundColor: 'rgba(239, 68, 68, 0.2)', // var(--color-error) with opacity
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 10,
+          }}>
+            <div style={{
+              backgroundColor: 'var(--color-error)',
+              color: 'white',
+              borderRadius: '50%',
+              width: '40px',
+              height: '40px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+            }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 6h18"></path>
+                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                <line x1="10" y1="11" x2="10" y2="17"></line>
+                <line x1="14" y1="11" x2="14" y2="17"></line>
+              </svg>
+            </div>
+          </div>
+        )}
       </div>
       
-      <div style={{ fontSize: '0.875rem', fontWeight: '500', color: 'var(--color-text)' }}>
-        Page {pageIndex}
+      <div style={{ fontSize: '0.875rem', fontWeight: '500', color: isSelectMode && isSelected ? 'var(--color-error)' : 'var(--color-text)' }}>
+        Page {pageIndex} {isSelectMode && isSelected && '(Remove)'}
       </div>
       
-      <div style={{ display: 'flex', gap: '0.5rem' }}>
-        <button 
-          onClick={onRotateCcw}
-          aria-label={`Rotate page ${pageIndex} counterclockwise`}
-          style={{ padding: '0.5rem', background: 'var(--color-elevated)', border: '1px solid var(--color-border)', borderRadius: '4px', cursor: 'pointer', color: 'var(--color-text)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-            <path d="M3 3v5h5"/>
-          </svg>
-        </button>
-        <button 
-          onClick={onRotateCw}
-          aria-label={`Rotate page ${pageIndex} clockwise`}
-          style={{ padding: '0.5rem', background: 'var(--color-elevated)', border: '1px solid var(--color-border)', borderRadius: '4px', cursor: 'pointer', color: 'var(--color-text)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 12a9 9 0 1 1-9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
-            <path d="M21 3v5h-5"/>
-          </svg>
-        </button>
-      </div>
+      {mode === 'rotate' && (
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <button 
+            onClick={(e) => { e.stopPropagation(); onRotateCcw?.(); }}
+            aria-label={`Rotate page ${pageIndex} counterclockwise`}
+            style={{ padding: '0.5rem', background: 'var(--color-elevated)', border: '1px solid var(--color-border)', borderRadius: '4px', cursor: 'pointer', color: 'var(--color-text)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+              <path d="M3 3v5h5"/>
+            </svg>
+          </button>
+          <button 
+            onClick={(e) => { e.stopPropagation(); onRotateCw?.(); }}
+            aria-label={`Rotate page ${pageIndex} clockwise`}
+            style={{ padding: '0.5rem', background: 'var(--color-elevated)', border: '1px solid var(--color-border)', borderRadius: '4px', cursor: 'pointer', color: 'var(--color-text)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 12a9 9 0 1 1-9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+              <path d="M21 3v5h-5"/>
+            </svg>
+          </button>
+        </div>
+      )}
     </div>
   );
 }

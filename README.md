@@ -28,6 +28,7 @@ A production-ready, client-side web platform for image and PDF processing utilit
 - Split PDF
 - Rotate PDF
 - Compress PDF
+- Remove PDF Pages
 
 *(More tools marked as "Coming Soon" in the registry)*
 

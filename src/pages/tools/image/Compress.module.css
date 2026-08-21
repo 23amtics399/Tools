@@ -24,13 +24,19 @@
 }
 
 .formatButtons {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 0.5rem;
 }
 
+@media (max-width: 480px) {
+  .formatButtons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .formatButton {
-  flex: 1;
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem 0.25rem;
   border-radius: var(--radius-md);
   font-size: var(--font-size-sm);
   font-weight: 500;
@@ -38,6 +44,8 @@
   background-color: var(--color-card);
   color: var(--color-text);
   border: 1px solid var(--color-border);
+  white-space: normal;
+  line-height: 1.2;
 }
 
 .formatButton:hover {

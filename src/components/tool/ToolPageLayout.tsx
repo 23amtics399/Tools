@@ -95,7 +95,7 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
     }
 
     const appFiles: AppFile[] = toAdd.map(f => ({
-      id: crypto.randomUUID(),
+      id: typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2) + Date.now().toString(36),
       file: f,
       name: f.name,
       size: f.size,

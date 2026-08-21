@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 28rem;
+  margin: 1rem auto 0;
+  padding: 1rem;
+  background-color: var(--color-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.optionGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.qualityHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.qualityHint {
+  font-size: var(--font-size-xs);
+  color: var(--color-muted);
+}
+
+.slider {
+  width: 100%;
+  accent-color: var(--color-primary);
+}
+
+.infoText {
+  font-size: var(--font-size-xs);
+  color: var(--color-muted);
+  margin-top: 0.25rem;
+  line-height: 1.4;
+}

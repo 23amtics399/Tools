@@ -8,6 +8,7 @@ import { useFileUpload } from '../../../hooks/useFileUpload';
 import { mergePdfs } from '../../../processors';
 import { AppFile } from '../../../types/file';
 import { DragHandleIcon, FileIcon, MoveUpIcon, MoveDownIcon, CloseIcon } from '../../../components/icons/IconRegistry';
+import { formatFileSize } from '../../../lib/fileValidation';
 import styles from './Merge.module.css';
 
 export default function MergePdf() {
@@ -172,7 +173,7 @@ export default function MergePdf() {
                 <div className={styles.info}>
                   <div className={styles.name}>{f.name}</div>
                   <div className={styles.meta}>
-                    <span>{(f.size / 1024 / 1024).toFixed(2)} MB</span>
+                    <span>{formatFileSize(f.size)}</span>
                   </div>
                 </div>
                 <div className={styles.controls}>
@@ -245,7 +246,7 @@ export default function MergePdf() {
         <div style={{ padding: '2rem', textAlign: 'center', backgroundColor: 'var(--color-elevated)', borderRadius: '12px', marginTop: '2rem', border: '1px solid var(--color-border)' }}>
           <h3 style={{ marginBottom: '1rem', color: 'var(--color-text)' }}>Merge Complete!</h3>
           <p style={{ marginBottom: '1.5rem', color: 'var(--color-muted)' }}>
-            {result.fileName} ({(result.processedSize / 1024 / 1024).toFixed(2)} MB)
+            {result.fileName} ({formatFileSize(result.processedSize)})
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
             <a 

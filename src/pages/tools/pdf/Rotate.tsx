@@ -10,9 +10,10 @@ import { useFileUpload } from '../../../hooks/useFileUpload';
 import { rotatePdf } from '../../../processors/pdf/rotate';
 import { ProcessorResult } from '../../../types/file';
 import { PdfThumbnail } from '../../../components/tool/PdfThumbnail';
+import { formatFileSize } from '../../../lib/fileValidation';
 
 export default function RotatePdf() {
-  const tool = useToolConfig('rotate');
+  const tool = useToolConfig();
   const { files, addFiles, removeFile, clearFiles, error: uploadError } = useFileUpload(tool!);
   
   const [isProcessing, setIsProcessing] = useState(false);
@@ -208,7 +209,7 @@ export default function RotatePdf() {
               <div>
                 <div style={{ fontWeight: '600', color: 'var(--color-text)' }}>{files[0].name}</div>
                 <div style={{ fontSize: '0.875rem', color: 'var(--color-muted)' }}>
-                  {(files[0].size / 1024 / 1024).toFixed(2)} MB
+                  {formatFileSize(files[0].size)}
                   {pageCount !== null && ` • ${pageCount} pages`}
                 </div>
               </div>
@@ -330,7 +331,7 @@ export default function RotatePdf() {
         <div style={{ padding: '2rem', textAlign: 'center', backgroundColor: 'var(--color-elevated)', borderRadius: '12px', marginTop: '2rem', border: '1px solid var(--color-border)' }}>
           <h3 style={{ marginBottom: '1rem', color: 'var(--color-text)' }}>Rotation Complete!</h3>
           <p style={{ marginBottom: '1.5rem', color: 'var(--color-muted)' }}>
-            {result.fileName} ({(result.processedSize / 1024 / 1024).toFixed(2)} MB)
+            {result.fileName} ({formatFileSize(result.processedSize)})
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
             <a 

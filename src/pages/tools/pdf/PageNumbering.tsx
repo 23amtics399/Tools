@@ -14,6 +14,7 @@ import type { PDFDocumentProxy } from 'pdfjs-dist';
 import { PdfThumbnail } from '../../../components/tool/PdfThumbnail';
 import { PdfCustomPositionEditor } from '../../../components/tool/PdfCustomPositionEditor';
 import { parseRanges, getFontSizeForOption, getMarginForOption, calculateVisualPosition } from '../../../processors/pdf/utils';
+import { formatFileSize } from '../../../lib/fileValidation';
 import styles from './PageNumbering.module.css';
 
 export const PageNumbering: React.FC = () => {
@@ -284,7 +285,7 @@ export const PageNumbering: React.FC = () => {
                 <div>
                   <div className={styles.fileName}>{file.name}</div>
                   <div className={styles.fileMeta}>
-                    {(file.size / 1024 / 1024).toFixed(2)} MB
+                    {formatFileSize(file.size)}
                     {!!file.result?.metadata?.pageCount && ` • ${String(file.result.metadata.pageCount)} pages`}
                   </div>
                 </div>

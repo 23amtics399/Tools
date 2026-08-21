@@ -286,13 +286,16 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
                 <h2 className={styles.resultsTitle}>
                   <SuccessIcon size={24} style={{ display: 'inline-block', verticalAlign: 'text-bottom', marginRight: '8px', color: 'var(--color-success)' }} />
                   {completedResults.length} file{completedResults.length > 1 ? 's' : ''} processed
-                  {completedResults.length > 0 && (
-                    <span className={styles.savedSize}>
-                      {' '}— Saved {formatFileSize(
-                        completedResults.reduce((acc, r) => acc + (r.originalSize - r.processedSize), 0)
-                      )}
-                    </span>
-                  )}
+                  {(() => {
+                    if (completedResults.length === 0) return null;
+                    const saved = completedResults.reduce((acc, r) => acc + (r.originalSize - r.processedSize), 0);
+                    if (saved <= 0) return null;
+                    return (
+                      <span className={styles.savedSize}>
+                        {' '}— Saved {formatFileSize(saved)}
+                      </span>
+                    );
+                  })()}
                 </h2>
 
                 {renderCustomResult ? (

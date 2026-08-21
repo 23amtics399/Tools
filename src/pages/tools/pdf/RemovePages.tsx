@@ -10,6 +10,7 @@ import { removePdfPages } from '../../../processors/pdf/removePages';
 import { ProcessorResult } from '../../../types/file';
 import { PdfThumbnail } from '../../../components/tool/PdfThumbnail';
 import { parseRanges, stringifyRanges } from '../../../processors/pdf/utils';
+import { formatFileSize } from '../../../lib/fileValidation';
 
 export default function RemovePagesPdf() {
   const tool = useToolConfig('pdf-remove-pages');
@@ -236,7 +237,7 @@ export default function RemovePagesPdf() {
               <div>
                 <div style={{ fontWeight: '600', color: 'var(--color-text)' }}>{files[0].name}</div>
                 <div style={{ fontSize: '0.875rem', color: 'var(--color-muted)' }}>
-                  {(files[0].size / 1024 / 1024).toFixed(2)} MB
+                  {formatFileSize(files[0].size)}
                   {pageCount !== null && ` • ${pageCount} pages`}
                 </div>
               </div>
@@ -353,7 +354,7 @@ export default function RemovePagesPdf() {
         <div style={{ padding: '2rem', textAlign: 'center', backgroundColor: 'var(--color-elevated)', borderRadius: '12px', marginTop: '2rem', border: '1px solid var(--color-border)' }}>
           <h3 style={{ marginBottom: '1rem', color: 'var(--color-text)' }}>Pages Removed Successfully!</h3>
           <p style={{ marginBottom: '1.5rem', color: 'var(--color-muted)' }}>
-            {result.fileName} ({(result.processedSize / 1024 / 1024).toFixed(2)} MB)
+            {result.fileName} ({formatFileSize(result.processedSize)})
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
             <a 

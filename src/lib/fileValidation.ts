@@ -3,6 +3,10 @@ import { ToolDefinition } from '../types/tool';
 export function validateFileType(file: File, acceptedTypes: string[]): boolean {
   if (!acceptedTypes || acceptedTypes.length === 0) return true;
   return acceptedTypes.some(type => {
+    if (type.startsWith('.')) {
+      const ext = getFileExtension(file.name);
+      return ext === type.substring(1).toLowerCase();
+    }
     if (type.endsWith('/*')) {
       return file.type.startsWith(type.replace('/*', '/'));
     }
@@ -37,9 +41,9 @@ export function validateFiles(files: File[], tool: ToolDefinition): { valid: Fil
 
   for (const file of files) {
     if (!validateFileType(file, tool.acceptedTypes)) {
-      errors.add(`File type not supported for ${file.name}.`);
+      errors.add(`File type not supported for ${file.name}`);
     } else if (!validateFileSize(file, tool.maxFileSizeMB)) {
-      errors.add(`${file.name} exceeds the maximum size of ${tool.maxFileSizeMB}MB.`);
+      errors.add(`${file.name} exceeds the maximum size of ${tool.maxFileSizeMB}MB`);
     } else {
       valid.push(file);
     }

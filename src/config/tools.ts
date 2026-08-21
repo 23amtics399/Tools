@@ -707,23 +707,38 @@ export const TOOLS: ToolDefinition[] = [
     id: 'heic-converter',
     name: 'HEIC Converter',
     slug: 'heic-converter',
-    category: 'other',
+    category: 'image',
     path: '/image/heic-converter',
     description: 'Convert iPhone HEIC photos to JPG or PNG.',
     shortDescription: 'Convert HEIC to JPG/PNG',
     icon: 'heic-converter',
-    acceptedTypes: ['image/heic', 'image/heif'],
+    acceptedTypes: ['image/heic', 'image/heif', '.heic', '.heif'],
     maxFileSizeMB: 50,
     maxFiles: 20,
-    status: 'coming-soon',
+    status: 'active',
+    popular: true,
+    supportsMultipleFiles: true,
+    options: [
+      { id: 'format', label: 'Output Format', type: 'select', defaultValue: 'jpg', options: [{ label: 'JPG', value: 'jpg' }, { label: 'PNG', value: 'png' }] },
+      { id: 'quality', label: 'Quality (JPG)', type: 'slider', defaultValue: 90, min: 1, max: 100, step: 1 }
+    ],
     seo: {
-      title: 'Convert HEIC to JPG Online | Tools',
-      description: 'Convert your HEIC images from iPhone to standard JPG or PNG formats.',
-      keywords: ['heic to jpg', 'heic converter', 'iphone photo converter']
+      title: 'Convert HEIC to JPG Online Free | Tools',
+      description: 'Convert your HEIC images from iPhone to standard JPG or PNG formats directly in your browser. No server uploads.',
+      keywords: ['heic to jpg', 'heic converter', 'iphone photo converter', 'convert heic online']
     },
-    faq: [],
-    howToUse: [],
-    relatedToolIds: []
+    faq: [
+      { question: 'Is it safe to convert my HEIC photos?', answer: 'Yes! The conversion happens entirely within your web browser. Your photos are never uploaded to any server.' },
+      { question: 'Why are my iPhone photos in HEIC format?', answer: 'Apple uses HEIC (High-Efficiency Image Container) to save space with better compression than JPG, but it is not widely supported on Windows or the web.' },
+      { question: 'Will I lose quality?', answer: 'You can control the quality of the JPG output, or choose PNG for a lossless conversion.' }
+    ],
+    howToUse: [
+      'Select one or more HEIC/HEIF images.',
+      'Choose your desired output format (JPG or PNG).',
+      'If using JPG, adjust the quality slider.',
+      'Download your converted files.'
+    ],
+    relatedToolIds: ['image-compress', 'image-resize']
   },
   {
     id: 'passport-photo',

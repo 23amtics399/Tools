@@ -9,9 +9,8 @@
 
 .main {
   flex: 1;
-  max-width: 1536px;
   width: 100%;
   margin: 0 auto;
-  /* Header is 64px. 1rem (16px) gap below header. */
-  padding: calc(64px + 1rem) 1.5rem 3rem;
+  /* padding is handled by individual pages and sections based on the reference design */
+  padding: 0;
 }

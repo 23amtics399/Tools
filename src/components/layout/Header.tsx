@@ -1,28 +1,36 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ThemeToggle } from './ThemeToggle';
+import { ToolsBySJILogo } from '../icons/ToolsBySJILogo';
+import { MenuIcon, CloseIcon } from '../icons/IconRegistry';
 import styles from './Header.module.css';
 
 export const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+
+  const isActive = (path: string) => {
+    if (path === '/tools' && location.pathname === '/') return true;
+    if (path === '/tools' && location.pathname === '/tools') return true;
+    if (path !== '/tools' && location.pathname.startsWith(path)) return true;
+    return false;
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
         <Link to="/" className={styles.logo}>
-          <span className={styles.logoText}>Tools</span>
-          <span className={styles.subtitle}>by sji.one</span>
+          <ToolsBySJILogo />
         </Link>
         <nav className={`${styles.nav} ${isOpen ? styles.open : ''}`}>
-          <Link to="/image" className={styles.link} onClick={() => setIsOpen(false)}>Image Tools</Link>
-          <Link to="/pdf" className={styles.link} onClick={() => setIsOpen(false)}>PDF Tools</Link>
-          <Link to="/tools" className={styles.link} onClick={() => setIsOpen(false)}>All Tools</Link>
+          <Link to="/tools" className={`${styles.link} ${isActive('/tools') ? styles.active : ''}`} onClick={() => setIsOpen(false)}>All Tools</Link>
+          <Link to="/pdf" className={`${styles.link} ${isActive('/pdf') ? styles.active : ''}`} onClick={() => setIsOpen(false)}>PDF Tools</Link>
+          <Link to="/image" className={`${styles.link} ${isActive('/image') ? styles.active : ''}`} onClick={() => setIsOpen(false)}>Image Tools</Link>
         </nav>
         <div className={styles.controls}>
           <ThemeToggle />
           <button className={styles.menuBtn} onClick={() => setIsOpen(!isOpen)} aria-label="Menu">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-              {isOpen ? <path d="M6 18L18 6M6 6l12 12" /> : <path d="M4 6h16M4 12h16M4 18h16" />}
-            </svg>
+             {isOpen ? <CloseIcon size={24} /> : <MenuIcon size={24} />}
           </button>
         </div>
       </div>

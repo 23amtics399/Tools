@@ -7,12 +7,12 @@ import { ToolIcon } from '../icons/ToolIcon';
 
 export const ToolCard: React.FC<{ tool: ToolDefinition }> = ({ tool }) => {
   return (
-    <Link to={tool.path} className={`${styles.card} ${tool.status === 'coming-soon' ? styles.comingSoon : ''}`}>
-      <div className={styles.icon}><ToolIcon name={tool.icon} /></div>
-      <div className={styles.content}>
-        <h3 className={styles.name}>{tool.name}</h3>
-        <p className={styles.desc}>{tool.shortDescription}</p>
+    <Link to={tool.path} className={`${styles.card} ${styles[tool.category]} ${tool.status === 'coming-soon' ? styles.comingSoon : ''}`}>
+      <div className={styles.icon}>
+        <ToolIcon name={tool.icon} />
       </div>
+      <h3 className={styles.name}>{tool.name}</h3>
+      <p className={styles.desc}>{tool.shortDescription}</p>
       {tool.status === 'coming-soon' && (
         <div className={styles.badgeWrapper}>
           <Badge variant="coming-soon">Coming Soon</Badge>

@@ -2,6 +2,7 @@
   text-align: center;
   max-width: 800px;
   margin: 0 auto;
+  padding-top: 1.5rem;
 }
 
 .breadcrumbs {
@@ -43,6 +44,26 @@
 
 .icon {
   font-size: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: var(--radius-md);
+}
+
+.image {
+  color: #3b82f6;
+  background-color: #eff6ff;
+}
+
+.pdf {
+  color: #ef4444;
+  background-color: #fef2f2;
+}
+
+.other {
+  color: #a855f7;
+  background-color: #faf5ff;
 }
 
 .title {

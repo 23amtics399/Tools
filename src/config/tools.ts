@@ -20,7 +20,7 @@ export const CATEGORIES: CategoryInfo[] = [
     name: 'Other Tools',
     description: 'Miscellaneous utilities and helpful tools.',
     icon: 'other-category',
-    color: '#10b981'
+    color: '#a855f7'
   }
 ];
 

@@ -9,6 +9,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onSearch }) => (
   <section className={styles.hero}>
+    <div className={styles.bgGradient}></div>
     <div className={styles.content}>
       <h1 className={styles.title}>Free Online Image & PDF Tools</h1>
       <p className={styles.subtitle}>Compress, resize, crop, convert and manage your files directly in your browser.</p>
@@ -21,20 +22,13 @@ export const Hero: React.FC<HeroProps> = ({ onSearch }) => (
         <span className={styles.indicator}>
           <span className={styles.icon}><InfoIcon size={16} /></span> Private
         </span>
-        <span className={styles.dot}>·</span>
         <span className={styles.indicator}>
           <span className={styles.icon}><ProcessingIcon size={16} /></span> Fast
         </span>
-        <span className={styles.dot}>·</span>
         <span className={styles.indicator}>
           <span className={styles.icon}><SuccessIcon size={16} /></span> Free
         </span>
       </div>
-    </div>
-    
-    <div className={styles.orbs}>
-      <div className={styles.orb1} />
-      <div className={styles.orb2} />
     </div>
   </section>
 );

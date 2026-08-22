@@ -64,7 +64,10 @@ export default function Home() {
         {!searchQuery && (
           <>
             <section className={styles.section}>
-              <h2 className={styles.sectionTitle}>Popular Tools</h2>
+              <div className={styles.sectionHeader}>
+                <div className={styles.accentBar}></div>
+                <h2 className={styles.sectionTitle}>Popular Tools</h2>
+              </div>
               <AllToolsGrid tools={popularTools} />
             </section>
             
@@ -74,7 +77,10 @@ export default function Home() {
               
               return (
                 <section key={cat.id} className={styles.section} id={`${cat.id}-tools`}>
-                  <h2 className={styles.sectionTitle}>{cat.name}</h2>
+                  <div className={styles.sectionHeader}>
+                    <div className={styles.accentBar}></div>
+                    <h2 className={styles.sectionTitle}>{cat.name}</h2>
+                  </div>
                   <AllToolsGrid tools={categoryTools} />
                 </section>
               );
@@ -84,7 +90,10 @@ export default function Home() {
 
         {searchQuery && (
           <section className={styles.section} id="search-results">
-            <h2 className={styles.sectionTitleLeft}>Search Results</h2>
+            <div className={styles.sectionHeader}>
+              <div className={styles.accentBar}></div>
+              <h2 className={styles.sectionTitle}>Search Results</h2>
+            </div>
             <AllToolsGrid tools={allTools} searchQuery={searchQuery} />
           </section>
         )}

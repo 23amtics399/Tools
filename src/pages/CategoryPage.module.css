@@ -1,18 +1,25 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  padding-bottom: 3rem;
+  gap: var(--space-section-gap);
+  padding-bottom: 5rem;
 }
 
 .section {
-  padding: 0 1rem;
+  padding: 0 var(--space-gutter);
+  max-width: var(--space-container-max);
+  width: 100%;
+  margin: 0 auto;
 }
 
 .header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   max-width: 800px;
-  margin: 0 auto 2rem;
+  margin: 0 auto var(--space-section-gap);
+  padding-top: 1.5rem;
 }
 
 .breadcrumbs {

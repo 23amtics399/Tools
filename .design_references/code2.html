@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+
+<html class="" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DevSuite Utils - Free Online Image &amp; PDF Tools</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-primary-container": "#747676",
+                "on-secondary-fixed": "#191c1e",
+                "surface-variant": "#e5e2e1",
+                "on-secondary": "#ffffff",
+                "pdf-red": "#EF4444",
+                "on-primary": "#ffffff",
+                "on-primary-fixed": "#1a1c1c",
+                "secondary-container": "#e0e3e5",
+                "on-secondary-fixed-variant": "#444749",
+                "on-error": "#ffffff",
+                "error-container": "#ffdad6",
+                "other-purple": "#A855F7",
+                "on-tertiary-fixed": "#1a1c1c",
+                "border-subtle": "#E2E8F0",
+                "background": "#fcf8f8",
+                "primary-fixed": "#e2e2e2",
+                "secondary": "#5c5f61",
+                "text-main": "#0F172A",
+                "on-tertiary": "#ffffff",
+                "surface-dim": "#ddd9d9",
+                "tertiary-fixed": "#e2e2e2",
+                "surface-container": "#f1edec",
+                "on-error-container": "#93000a",
+                "surface-container-lowest": "#ffffff",
+                "on-secondary-container": "#626567",
+                "secondary-fixed-dim": "#c4c7c9",
+                "primary-container": "#ffffff",
+                "image-blue": "#3B82F6",
+                "surface-container-high": "#ebe7e7",
+                "surface-container-low": "#f6f3f2",
+                "outline": "#747878",
+                "success-green": "#10B981",
+                "surface": "#fcf8f8",
+                "inverse-primary": "#c6c6c7",
+                "on-surface": "#1c1b1b",
+                "on-primary-fixed-variant": "#454747",
+                "tertiary": "#5d5f5f",
+                "tertiary-fixed-dim": "#c6c6c7",
+                "secondary-fixed": "#e0e3e5",
+                "tertiary-container": "#ffffff",
+                "outline-variant": "#c4c7c8",
+                "on-surface-variant": "#444748",
+                "on-tertiary-fixed-variant": "#454747",
+                "text-muted": "#64748B",
+                "surface-container-highest": "#e5e2e1",
+                "on-tertiary-container": "#747676",
+                "on-background": "#1c1b1b",
+                "surface-tint": "#5d5f5f",
+                "inverse-on-surface": "#f4f0ef",
+                "surface-bright": "#fcf8f8",
+                "error": "#ba1a1a",
+                "primary": "#5d5f5f",
+                "primary-fixed-dim": "#c6c6c7",
+                "inverse-surface": "#313030"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "container-max": "1200px",
+                "margin-mobile": "16px",
+                "gutter": "24px",
+                "unit": "8px",
+                "section-gap": "80px"
+        },
+        "fontFamily": {
+                "body-sm": [
+                        "Inter"
+                ],
+                "headline-md": [
+                        "Inter"
+                ],
+                "display-lg-mobile": [
+                        "Inter"
+                ],
+                "body-md": [
+                        "Inter"
+                ],
+                "label-caps": [
+                        "Inter"
+                ],
+                "title-sm": [
+                        "Inter"
+                ],
+                "display-lg": [
+                        "Inter"
+                ]
+        },
+        "fontSize": {
+                "body-sm": [
+                        "14px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "700"
+                        }
+                ],
+                "display-lg-mobile": [
+                        "32px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "800"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-caps": [
+                        "12px",
+                        {
+                                "lineHeight": "1",
+                                "letterSpacing": "0.1em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "title-sm": [
+                        "18px",
+                        {
+                                "lineHeight": "1.5",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "1.1",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "800"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        .glass-input {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 1);
+        }
+        .glass-input:focus-within {
+            border-color: rgba(59, 130, 246, 0.5);
+            background: rgba(255, 255, 255, 1);
+        }
+        .tool-card {
+            transition: all 0.2s ease-in-out;
+        }
+        .tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .tool-card.image-category:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 0 20px -5px rgba(59, 130, 246, 0.15);
+        }
+        .tool-card.pdf-category:hover {
+            border-color: rgba(239, 68, 68, 0.4);
+            box-shadow: 0 0 20px -5px rgba(239, 68, 68, 0.15);
+        }
+        .tool-card.other-category:hover {
+            border-color: rgba(168, 85, 247, 0.4);
+            box-shadow: 0 0 20px -5px rgba(168, 85, 247, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-background text-text-main antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="w-full bg-surface shadow-sm border-b border-border-subtle sticky top-0 z-50">
+<div class="max-w-container-max mx-auto px-gutter h-16 flex items-center justify-between">
+<a class="flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-image-blue text-2xl">construction</span>
+<span class="font-headline-md text-headline-md text-text-main tracking-tight">DevSuite Utils</span>
+</a>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-body-md text-body-md text-text-main font-medium border-b-2 border-image-blue pb-1" href="#">All Tools</a>
+<a class="font-body-md text-body-md text-text-muted hover:text-text-main transition-colors" href="#">Image Tools</a>
+<a class="font-body-md text-body-md text-text-muted hover:text-text-main transition-colors" href="#">PDF Tools</a>
+<a class="font-body-md text-body-md text-text-muted hover:text-text-main transition-colors" href="#">Recent</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="p-2 text-text-muted hover:text-text-main hover:bg-surface-container rounded-full transition-colors" title="Settings">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="p-2 text-text-muted hover:text-text-main hover:bg-surface-container rounded-full transition-colors" title="Account">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center">
+<!-- Hero Section -->
+<section class="w-full py-section-gap px-gutter flex flex-col items-center justify-center text-center relative overflow-hidden bg-white border-b border-border-subtle shadow-sm">
+<div class="absolute inset-0 bg-gradient-to-b from-surface-container-low to-transparent pointer-events-none"></div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-text-main mb-unit z-10">
+                Free Online Image &amp; PDF Tools
+            </h1>
+<p class="font-body-md text-body-md text-text-muted mb-8 max-w-2xl z-10">
+                Compress, resize, crop, convert and manage your files directly in your browser.
+            </p>
+<div class="w-full max-w-3xl glass-input rounded-xl flex items-center px-4 py-3 z-10 transition-colors duration-200">
+<span class="material-symbols-outlined text-outline mr-3">search</span>
+<input class="bg-transparent border-none outline-none text-text-main w-full font-body-md text-body-md placeholder-text-muted focus:ring-0" placeholder="Search for tools..." type="text"/>
+</div>
+<div class="flex items-center gap-4 mt-6 text-text-muted font-label-caps text-label-caps z-10">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">lock</span> Private</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">bolt</span> Fast</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">check_circle</span> Free</div>
+</div>
+</section>
+<!-- Main Content Area -->
+<div class="w-full max-w-container-max px-gutter py-section-gap flex flex-col gap-section-gap">
+<!-- Popular Tools -->
+<section>
+<div class="flex items-center gap-2 mb-6">
+<div class="w-1 h-6 bg-primary rounded-full"></div>
+<h2 class="font-headline-md text-headline-md text-text-main">Popular Tools</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Image Compressor -->
+<a class="tool-card image-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col group cursor-pointer shadow-sm" href="#">
+<div class="text-image-blue mb-4"><span class="material-symbols-outlined text-3xl">compress</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1 group-hover:text-image-blue transition-colors">Image Compressor</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Compress images instantly</p>
+</a>
+<!-- Image Resizer -->
+<a class="tool-card image-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col group cursor-pointer shadow-sm" href="#">
+<div class="text-image-blue mb-4"><span class="material-symbols-outlined text-3xl">aspect_ratio</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1 group-hover:text-image-blue transition-colors">Image Resizer</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Resize images to exact dimensions</p>
+</a>
+<!-- PDF to Images -->
+<a class="tool-card pdf-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col group cursor-pointer shadow-sm" href="#">
+<div class="text-pdf-red mb-4"><span class="material-symbols-outlined text-3xl">photo_library</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1 group-hover:text-pdf-red transition-colors">PDF to Images</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Extract PDF pages as images</p>
+</a>
+<!-- Merge PDF -->
+<a class="tool-card pdf-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col group cursor-pointer shadow-sm" href="#">
+<div class="text-pdf-red mb-4"><span class="material-symbols-outlined text-3xl">join_inner</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1 group-hover:text-pdf-red transition-colors">Merge PDF</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Combine multiple PDFs into one document</p>
+</a>
+</div>
+</section>
+<!-- Image Tools -->
+<section>
+<div class="flex items-center gap-2 mb-6">
+<div class="w-1 h-6 bg-image-blue rounded-full"></div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-image-blue uppercase tracking-wider">Image</span>
+<h2 class="font-headline-md text-headline-md text-text-main">Image Tools</h2>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Image Compressor -->
+<a class="tool-card image-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col group cursor-pointer shadow-sm" href="#">
+<div class="text-image-blue mb-4"><span class="material-symbols-outlined text-3xl">compress</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1 group-hover:text-image-blue transition-colors">Image Compressor</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Compress images instantly</p>
+</a>
+<!-- Image Resizer -->
+<a class="tool-card image-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col group cursor-pointer shadow-sm" href="#">
+<div class="text-image-blue mb-4"><span class="material-symbols-outlined text-3xl">aspect_ratio</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1 group-hover:text-image-blue transition-colors">Image Resizer</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Resize images to exact dimensions</p>
+</a>
+<!-- Image Cropper -->
+<a class="tool-card image-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col group cursor-pointer shadow-sm" href="#">
+<div class="text-image-blue mb-4"><span class="material-symbols-outlined text-3xl">crop</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1 group-hover:text-image-blue transition-colors">Image Cropper</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Crop images visually</p>
+</a>
+<!-- JPG to PNG -->
+<a class="tool-card image-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col group cursor-pointer shadow-sm" href="#">
+<div class="text-image-blue mb-4"><span class="material-symbols-outlined text-3xl">transform</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1 group-hover:text-image-blue transition-colors">JPG to PNG</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Convert JPG to PNG</p>
+</a>
+<!-- PNG to JPG -->
+<a class="tool-card image-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col group cursor-pointer shadow-sm" href="#">
+<div class="text-image-blue mb-4"><span class="material-symbols-outlined text-3xl">transform</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1 group-hover:text-image-blue transition-colors">PNG to JPG</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Convert PNG to JPG</p>
+</a>
+<!-- WebP Converter -->
+<a class="tool-card image-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col group cursor-pointer shadow-sm" href="#">
+<div class="text-image-blue mb-4"><span class="material-symbols-outlined text-3xl">bolt</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1 group-hover:text-image-blue transition-colors">WebP Converter</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Convert images to WebP</p>
+</a>
+<!-- Image to PDF -->
+<a class="tool-card image-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col group cursor-pointer shadow-sm" href="#">
+<div class="text-image-blue mb-4"><span class="material-symbols-outlined text-3xl">picture_as_pdf</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1 group-hover:text-image-blue transition-colors">Image to PDF</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Convert images to PDF</p>
+</a>
+</div>
+</section>
+<!-- PDF Tools -->
+<section>
+<div class="flex items-center gap-2 mb-6">
+<div class="w-1 h-6 bg-pdf-red rounded-full"></div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-pdf-red uppercase tracking-wider">PDF</span>
+<h2 class="font-headline-md text-headline-md text-text-main">PDF Tools</h2>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- PDF to Images -->
+<a class="tool-card pdf-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col group cursor-pointer shadow-sm" href="#">
+<div class="text-pdf-red mb-4"><span class="material-symbols-outlined text-3xl">photo_library</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1 group-hover:text-pdf-red transition-colors">PDF to Images</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Extract PDF pages as images</p>
+</a>
+<!-- Merge PDF -->
+<a class="tool-card pdf-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col group cursor-pointer shadow-sm" href="#">
+<div class="text-pdf-red mb-4"><span class="material-symbols-outlined text-3xl">join_inner</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1 group-hover:text-pdf-red transition-colors">Merge PDF</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Combine multiple PDFs into one document</p>
+</a>
+<!-- Split PDF -->
+<a class="tool-card pdf-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col group cursor-pointer shadow-sm" href="#">
+<div class="text-pdf-red mb-4"><span class="material-symbols-outlined text-3xl">call_split</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1 group-hover:text-pdf-red transition-colors">Split PDF</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Split PDFs into multiple files</p>
+</a>
+<!-- Rotate PDF -->
+<a class="tool-card pdf-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col group cursor-pointer shadow-sm" href="#">
+<div class="text-pdf-red mb-4"><span class="material-symbols-outlined text-3xl">rotate_right</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1 group-hover:text-pdf-red transition-colors">Rotate PDF</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Rotate PDF pages</p>
+</a>
+<!-- Compress PDF -->
+<a class="tool-card pdf-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col group cursor-pointer shadow-sm" href="#">
+<div class="text-pdf-red mb-4"><span class="material-symbols-outlined text-3xl">compress</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1 group-hover:text-pdf-red transition-colors">Compress PDF</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Reduce PDF file size</p>
+</a>
+<!-- Remove PDF Pages -->
+<a class="tool-card pdf-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col group cursor-pointer shadow-sm" href="#">
+<div class="text-pdf-red mb-4"><span class="material-symbols-outlined text-3xl">delete</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1 group-hover:text-pdf-red transition-colors">Remove PDF Pages</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Delete pages from PDF</p>
+</a>
+<!-- PDF Page Numbering -->
+<a class="tool-card pdf-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col group cursor-pointer shadow-sm" href="#">
+<div class="text-pdf-red mb-4"><span class="material-symbols-outlined text-3xl">format_list_numbered</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1 group-hover:text-pdf-red transition-colors">PDF Page Numbering</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Add numbers to PDF pages</p>
+</a>
+</div>
+</section>
+<!-- Other Tools -->
+<section>
+<div class="flex items-center gap-2 mb-6">
+<div class="w-1 h-6 bg-other-purple rounded-full"></div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-other-purple uppercase tracking-wider">Other</span>
+<h2 class="font-headline-md text-headline-md text-text-main">Other Tools</h2>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- HEIC Converter -->
+<div class="tool-card other-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col relative opacity-70 shadow-sm">
+<div class="absolute top-4 right-4 bg-other-purple/10 text-other-purple font-label-caps text-label-caps px-2 py-1 rounded">COMING SOON</div>
+<div class="text-other-purple mb-4"><span class="material-symbols-outlined text-3xl">phone_iphone</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1">HEIC Converter</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Convert HEIC to JPG/PNG</p>
+</div>
+<!-- Passport Photo Maker -->
+<div class="tool-card other-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col relative opacity-70 shadow-sm">
+<div class="absolute top-4 right-4 bg-other-purple/10 text-other-purple font-label-caps text-label-caps px-2 py-1 rounded">COMING SOON</div>
+<div class="text-other-purple mb-4"><span class="material-symbols-outlined text-3xl">badge</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1">Passport Photo Maker</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Make ID and passport photos</p>
+</div>
+<!-- Signature Maker -->
+<div class="tool-card other-category bg-white border border-border-subtle rounded-xl p-6 flex flex-col relative opacity-70 shadow-sm">
+<div class="absolute top-4 right-4 bg-other-purple/10 text-other-purple font-label-caps text-label-caps px-2 py-1 rounded">COMING SOON</div>
+<div class="text-other-purple mb-4"><span class="material-symbols-outlined text-3xl">draw</span></div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-1">Signature Maker</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Create digital signatures</p>
+</div>
+</div>
+</section>
+<!-- Features Section -->
+<section class="py-12 border-t border-border-subtle mt-12 w-full">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center max-w-5xl mx-auto">
+<div class="flex flex-col items-center">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-image-blue mb-4">
+<span class="material-symbols-outlined text-3xl">lock</span>
+</div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-2">100% Private</h3>
+<p class="font-body-sm text-body-sm text-text-muted">All processing happens locally in your browser. Your files are never uploaded.</p>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-image-blue mb-4">
+<span class="material-symbols-outlined text-3xl">bolt</span>
+</div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-2">Lightning Fast</h3>
+<p class="font-body-sm text-body-sm text-text-muted">No upload or download wait times. Processing occurs at local speeds.</p>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-image-blue mb-4">
+<span class="material-symbols-outlined text-3xl">verified</span>
+</div>
+<h3 class="font-title-sm text-title-sm text-text-main mb-2">Free Forever</h3>
+<p class="font-body-sm text-body-sm text-text-muted">No hidden fees, no watermarks, no subscriptions. Just free tools.</p>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="max-w-3xl mx-auto w-full pb-12">
+<h2 class="font-headline-md text-headline-md text-text-main text-center mb-8">Frequently Asked Questions</h2>
+<div class="flex flex-col gap-4">
+<div class="bg-white border border-border-subtle rounded-xl p-6 cursor-pointer hover:bg-surface-container transition-colors shadow-sm">
+<div class="flex justify-between items-center">
+<h3 class="font-title-sm text-title-sm text-text-main">Is it really free?</h3>
+<span class="material-symbols-outlined text-outline">add</span>
+</div>
+</div>
+<div class="bg-white border border-border-subtle rounded-xl p-6 cursor-pointer hover:bg-surface-container transition-colors shadow-sm">
+<div class="flex justify-between items-center">
+<h3 class="font-title-sm text-title-sm text-text-main">Are my files safe?</h3>
+<span class="material-symbols-outlined text-outline">add</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-surface border-t border-border-subtle py-8 mt-auto">
+<div class="max-w-container-max mx-auto px-gutter flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex flex-col items-center md:items-start text-center md:text-left gap-2">
+<span class="font-title-sm text-title-sm text-text-main font-semibold">© 2024 DevSuite Utils. Precise. Utilitarian. Premium.</span>
+<div class="flex items-center gap-1 text-success-green">
+<span class="material-symbols-outlined text-sm">shield</span>
+<span class="font-body-sm text-body-sm text-text-muted">All processing happens in your browser</span>
+</div>
+</div>
+<nav class="flex flex-wrap items-center justify-center gap-6">
+<a class="font-body-sm text-body-sm text-text-muted hover:text-text-main transition-colors" href="#">Terms of Service</a>
+<a class="font-body-sm text-body-sm text-text-muted hover:text-text-main transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-text-muted hover:text-text-main transition-colors" href="#">API Docs</a>
+<a class="font-body-sm text-body-sm text-text-muted hover:text-text-main transition-colors" href="#">Contact Support</a>
+</nav>
+</div>
+</footer>
+</body></html>

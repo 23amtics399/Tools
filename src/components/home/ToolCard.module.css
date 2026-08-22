@@ -1,15 +1,57 @@
 .card {
-  display: flex; flex-direction: column; padding: 1.5rem;
-  background: var(--color-bg-card); border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg); text-decoration: none; color: inherit;
-  transition: all var(--transition-normal); position: relative; overflow: hidden;
+  display: flex; flex-direction: column; padding: var(--space-stack-md); /* 16px */
+  background: var(--color-card); border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl); text-decoration: none; color: inherit;
+  transition: all 0.2s ease-in-out; position: relative; overflow: hidden;
 }
+
 .card:hover {
-  transform: translateY(-4px); border-color: var(--color-border-hover);
-  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
 }
-.icon { font-size: 2.5rem; margin-bottom: 1rem; }
-.name { margin: 0 0 0.5rem; font-size: 1.125rem; font-weight: 600; color: var(--color-text); }
-.desc { margin: 0; font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.5; }
+
+[data-theme="dark"] .card:hover {
+  box-shadow: var(--shadow-hover-dark);
+}
+
+.card.image:hover {
+  border-color: rgba(96, 165, 250, 0.4);
+  box-shadow: 0 0 20px -5px rgba(96, 165, 250, 0.15);
+}
+
+.card.pdf:hover {
+  border-color: rgba(248, 113, 113, 0.4);
+  box-shadow: 0 0 20px -5px rgba(248, 113, 113, 0.15);
+}
+
+.card.other:hover {
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 0 20px -5px rgba(168, 85, 247, 0.15);
+}
+
+.icon {
+  margin-bottom: var(--space-stack-sm);
+}
+
+/* Category colors for icon and title hover */
+.card.image .icon, .card.image:hover .name { color: var(--color-image-accent); }
+.card.pdf .icon, .card.pdf:hover .name { color: var(--color-pdf-accent); }
+.card.other .icon, .card.other:hover .name { color: var(--color-other-accent); }
+
+.name { 
+  margin: 0 0 4px 0; /* mb-1 */
+  font-size: var(--font-size-title-sm); 
+  font-weight: 600; 
+  color: var(--color-text); 
+  transition: color 200ms ease-in-out;
+}
+
+.desc { 
+  margin: 0; 
+  font-size: var(--font-size-body-sm); 
+  color: var(--color-muted); 
+  line-height: 1.6; 
+}
+
 .comingSoon { opacity: 0.7; }
 .badgeWrapper { position: absolute; top: 1rem; right: 1rem; }

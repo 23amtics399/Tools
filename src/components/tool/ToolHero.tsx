@@ -11,7 +11,9 @@ export const ToolHero: React.FC<{ tool: ToolDefinition }> = ({ tool }) => (
       <Link to="/">Home</Link> / <Link to={`/${tool.category}`}>{tool.category.charAt(0).toUpperCase() + tool.category.slice(1)}</Link> / <span>{tool.name}</span>
     </div>
     <div className={styles.header}>
-      <span className={styles.icon}><ToolIcon name={tool.icon} size={48} /></span>
+      <span className={`${styles.icon} ${styles[tool.category]}`}>
+        <ToolIcon name={tool.icon} size={32} />
+      </span>
       <h1 className={styles.title}>{tool.name}</h1>
       <Badge variant="info">{tool.category.toUpperCase()}</Badge>
     </div>

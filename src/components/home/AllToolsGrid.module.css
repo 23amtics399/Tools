@@ -1,7 +1,15 @@
-.container { display: flex; flex-direction: column; gap: 3rem; }
-.section { }
-.header { font-size: 1.25rem; font-weight: 700; color: var(--color-text); margin: 0 0 1.5rem; letter-spacing: 0.05em; }
-.grid { display: grid; grid-template-columns: repeat(1, 1fr); gap: 1.5rem; }
-@media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+.grid { 
+  display: grid; grid-template-columns: repeat(1, 1fr); gap: 1.5rem; /* gap-6 */
+}
+@media (min-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 1280px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+
+.emptyState {
+  padding: 3rem;
+  text-align: center;
+  color: var(--color-muted);
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+}

@@ -4,12 +4,13 @@ export interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number | string;
 }
 
-function BaseIcon({ children, size = 24, className = '', style, ...props }: IconProps & { children: React.ReactNode }) {
+function MaterialIcon({ children, size = 24, className = '', style, ...props }: IconProps & { children: React.ReactNode }) {
   return (
     <svg
-      viewBox="0 0 24 24"
+      viewBox="0 -960 960 960"
       width={size}
       height={size}
+      fill="currentColor"
       className={className}
       style={{ display: 'inline-block', flexShrink: 0, ...style }}
       {...props}
@@ -20,266 +21,186 @@ function BaseIcon({ children, size = 24, className = '', style, ...props }: Icon
 }
 
 export function ImageCategoryIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M5 4a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H5Zm3 3.5A1.5 1.5 0 1 1 8 10.5a1.5 1.5 0 0 1 0-3Zm11 9.5H5l4.2-4.2a1 1 0 0 1 1.4 0l1.9 1.9 2.8-3a1 1 0 0 1 1.46.02L19 17Z"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M360-400h400L622-580l-92 120-62-80-108 140Zm-40 160q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></MaterialIcon>;
 }
 
 export function PdfCategoryIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M7 2h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm6 1.5V8h4.5L13 3.5ZM8 12h8v1.5H8V12Zm0 3h8v1.5H8V15Z"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M360-460h40v-80h40q17 0 28.5-11.5T480-580v-40q0-17-11.5-28.5T440-660h-80v200Zm40-120v-40h40v40h-40Zm120 120h80q17 0 28.5-11.5T640-500v-120q0-17-11.5-28.5T600-660h-80v200Zm40-40v-120h40v120h-40Zm120 40h40v-80h40v-40h-40v-40h40v-40h-80v200ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></MaterialIcon>;
 }
 
 export function OtherCategoryIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M3 7a2 2 0 0 1 2-2h3l1-1h6l1 1h3a2 2 0 0 1 2 2v2H3V7Zm0 4h18v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7Z"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M160-80q-33 0-56.5-23.5T80-160v-440q0-33 23.5-56.5T160-680h200v-120q0-33 23.5-56.5T440-880h80q33 0 56.5 23.5T600-800v120h200q33 0 56.5 23.5T880-600v440q0 33-23.5 56.5T800-80H160Zm0-80h640v-440H600q0 33-23.5 56.5T520-520h-80q-33 0-56.5-23.5T360-600H160v440Zm80-80h240v-18q0-17-9.5-31.5T444-312q-20-9-40.5-13.5T360-330q-23 0-43.5 4.5T276-312q-17 8-26.5 22.5T240-258v18Zm320-60h160v-60H560v60Zm-157.5-77.5Q420-395 420-420t-17.5-42.5Q385-480 360-480t-42.5 17.5Q300-445 300-420t17.5 42.5Q335-360 360-360t42.5-17.5ZM560-420h160v-60H560v60ZM440-600h80v-200h-80v200Zm40 220Z"/></MaterialIcon>;
 }
 
 export function CompressImageIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M4 4h6v2H6v4H4V4Zm10 0h6v6h-2V6h-4V4ZM4 14h2v4h4v2H4v-6Zm14 0h2v6h-6v-2h4v-4ZM9 9h6v6H9V9Z"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M160-400v-80h640v80H160Zm0-120v-80h640v80H160ZM440-80v-128l-64 64-56-56 160-160 160 160-56 56-64-62v126h-80Zm40-560L320-800l56-56 64 64v-128h80v128l64-64 56 56-160 160Z"/></MaterialIcon>;
 }
 
 export function ResizeImageIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M4 4h7v2H6v5H4V4Zm16 0v7h-2V6h-5V4h7ZM4 20v-7h2v5h5v2H4Zm16-7v7h-7v-2h5v-5h2Z"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M560-280h200v-200h-80v120H560v80ZM200-480h80v-120h120v-80H200v200Zm-40 320q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h640v-480H160v480Zm0 0v-480 480Z"/></MaterialIcon>;
 }
 
 export function CropImageIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M7 2h2v13a2 2 0 0 0 2 2h11v2H11a4 4 0 0 1-4-4V2Zm4 4h11v11h-2V8h-9V6Z"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M680-40v-160H280q-33 0-56.5-23.5T200-280v-400H40v-80h160v-160h80v640h640v80H760v160h-80Zm0-320v-320H360v-80h320q33 0 56.5 23.5T760-680v320h-80Z"/></MaterialIcon>;
 }
 
 export function ConvertImageIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M7 7h8V4l5 4-5 4V9H7V7Zm10 10H9v3l-5-4 5-4v3h8v2Z"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M640-40 480-200l56-58 64 64v-86H360q-33 0-56.5-23.5T280-360v-240H80v-80h200v-86l-64 64-56-58 160-160 160 160-56 58-64-64v406h520v80H680v86l64-64 56 58L640-40Zm-40-400v-160H440v-80h160q33 0 56.5 23.5T680-600v160h-80Z"/></MaterialIcon>;
 }
 
 export function WebpIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M13 2 5 13h5l-1 9 8-11h-5l1-9Z"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="m422-232 207-248H469l29-227-185 267h139l-30 208ZM320-80l40-280H160l360-520h80l-40 320h240L400-80h-80Zm151-390Z"/></MaterialIcon>;
 }
 
 export function ImageToPdfIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M4 6a2 2 0 0 1 2-2h5v6h6v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6Zm9-2 4 4h-4V4Zm-6 8 2-2 2 2 1-1 3 4H7v-3Z"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M360-460h40v-80h40q17 0 28.5-11.5T480-580v-40q0-17-11.5-28.5T440-660h-80v200Zm40-120v-40h40v40h-40Zm120 120h80q17 0 28.5-11.5T640-500v-120q0-17-11.5-28.5T600-660h-80v200Zm40-40v-120h40v120h-40Zm120 40h40v-80h40v-40h-40v-40h40v-40h-80v200ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></MaterialIcon>;
 }
 
 export function PdfToImagesIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M5 3h8l4 4v4h-2V8h-3a2 2 0 0 1-2-2V3H5v18h6v2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm8 10a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-8Zm1 6 2-2 1.5 1.5L19 16l2 3h-7Z"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M360-400h400L622-580l-92 120-62-80-108 140Zm-40 160q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></MaterialIcon>;
 }
 
 export function MergePdfIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M4 5a2 2 0 0 1 2-2h5v2H6v10h5v2H6a2 2 0 0 1-2-2V5Zm14 2a2 2 0 0 0-2-2h-5v2h5v10h-5v2h5a2 2 0 0 0 2-2V7Zm-7 1 4 4-4 4v-3H8v-2h3V8Z"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M320-200q-117 0-198.5-81.5T40-480q0-117 81.5-198.5T320-760q27 0 52.5 5t49.5 14q-17 14-32 30.5T362-676q-10-2-20.5-3t-21.5-1q-83 0-141.5 58.5T120-480q0 83 58.5 141.5T320-280q11 0 21.5-1t20.5-3q13 18 28 34.5t32 30.5q-24 9-49.5 14t-52.5 5Zm320 0q-27 0-52.5-5T538-219q17-14 32-30.5t28-34.5q11 2 21 3t21 1q83 0 141.5-58.5T840-480q0-83-58.5-141.5T640-680q-11 0-21 1t-21 3q-13-18-28-34.5T538-741q24-9 49.5-14t52.5-5q117 0 198.5 81.5T920-480q0 117-81.5 198.5T640-200Zm-160-50q-57-39-88.5-100T360-480q0-69 31.5-130T480-710q57 39 88.5 100T600-480q0 69-31.5 130T480-250Z"/></MaterialIcon>;
 }
 
 export function SplitPdfIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M3 4a2 2 0 0 1 2-2h5a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4Zm3 2v12h3V6H6Z"/>
-            <path d="M14 4a2 2 0 0 1 2-2h5a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2h-5a2 2 0 0 1-2-2V4Zm3 2v12h3V6h-3Z"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M440-160v-304L240-664v104h-80v-240h240v80H296l224 224v336h-80Zm154-376-58-58 128-126H560v-80h240v240h-80v-104L594-536Z"/></MaterialIcon>;
 }
 
 export function RotatePdfIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}>
-            <path d="M6 3h8l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/>
-            <path d="M13 3v5h5"/>
-            
-            <path d="M12 10a4 4 0 1 1 0 8" fill="none" stroke="rgba(0,0,0,0.4)" strokeWidth="1.8" strokeLinecap="round"/>
-            <path d="M12 18l-1.5 1.5L12 21" fill="rgba(0,0,0,0.4)" stroke="none"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M522-80v-82q34-5 66.5-18t61.5-34l56 58q-42 32-88 51.5T522-80Zm-80 0Q304-98 213-199.5T122-438q0-75 28.5-140.5t77-114q48.5-48.5 114-77T482-798h6l-62-62 56-58 160 160-160 160-56-56 64-64h-8q-117 0-198.5 81.5T202-438q0 104 68 182.5T442-162v82Zm322-134-58-56q21-29 34-61.5t18-66.5h82q-5 50-24.5 96T764-214Zm76-264h-82q-5-34-18-66.5T706-606l58-56q32 39 51 86t25 98Z"/></MaterialIcon>;
 }
 
 export function CompressPdfIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><rect x="8" y="8" width="8" height="8" rx="1"/>
-            
-            <path d="M12 2v3M10 3l2-1 2 1"/>
-            
-            <path d="M12 22v-3M10 21l2 1 2-1"/>
-            
-            <path d="M2 12h3M3 10l-1 2 1 2"/>
-            
-            <path d="M22 12h-3M21 10l1 2-1 2"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M160-400v-80h640v80H160Zm0-120v-80h640v80H160ZM440-80v-128l-64 64-56-56 160-160 160 160-56 56-64-62v126h-80Zm40-560L320-800l56-56 64 64v-128h80v128l64-64 56 56-160 160Z"/></MaterialIcon>;
 }
 
 export function RemovePdfPagesIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}>
-            <rect x="2" y="4" width="4" height="6" rx="0.5"/>
-            
-            <rect x="7" y="4" width="4" height="6" rx="0.5"/>
-            
-            <rect x="12" y="4" width="4" height="6" rx="0.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeDasharray="1.5 1.5"/>
-            
-            <rect x="17" y="4" width="4" height="6" rx="0.5"/>
-            
-            <path d="M13 5.5l2 2m0-2l-2 2" stroke="currentColor" strokeWidth="1.2" fill="none"/>
-            
-            <rect x="2" y="13" width="4" height="6" rx="0.5"/>
-            <rect x="7" y="13" width="4" height="6" rx="0.5"/>
-            <rect x="12" y="13" width="4" height="6" rx="0.5"/>
-            <rect x="17" y="13" width="4" height="6" rx="0.5"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></MaterialIcon>;
 }
 
 export function PdfNumberingIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M7 2h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm6 1.5V8h4.5L13 3.5Z"/>
-            <path d="M9 11h6v1.5H9V11Zm0 3h6v1.5H9V14Z"/>
-            
-            <text x="15" y="20" fontSize="4" fontWeight="bold" fill="currentColor">n</text></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M120-80v-60h100v-30h-60v-60h60v-30H120v-60h120q17 0 28.5 11.5T280-280v40q0 17-11.5 28.5T240-200q17 0 28.5 11.5T280-160v40q0 17-11.5 28.5T240-80H120Zm0-280v-110q0-17 11.5-28.5T160-510h60v-30H120v-60h120q17 0 28.5 11.5T280-560v70q0 17-11.5 28.5T240-450h-60v30h100v60H120Zm60-280v-180h-60v-60h120v240h-60Zm180 440v-80h480v80H360Zm0-240v-80h480v80H360Zm0-240v-80h480v80H360Z"/></MaterialIcon>;
 }
 
 export function HeicIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}>
-            <rect x="7" y="2" width="10" height="20" rx="2" fill="none" stroke="currentColor" strokeWidth="1.8"/>
-            <circle cx="12" cy="19" r="0.8"/>
-            <path d="M10 5h4"/>
-            
-            <rect x="9" y="8" width="6" height="6" rx="0.5"/>
-            <circle cx="10.8" cy="10" r="0.6"/>
-            <path d="M15 13l-1.5-1.5-1.5 1.5-1-1-2 2"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M280-40q-33 0-56.5-23.5T200-120v-720q0-33 23.5-56.5T280-920h400q33 0 56.5 23.5T760-840v124q18 7 29 22t11 34v80q0 19-11 34t-29 22v404q0 33-23.5 56.5T680-40H280Zm0-80h400v-720H280v720Zm0 0v-720 720Zm120-40h160q17 0 28.5-11.5T600-200q0-17-11.5-28.5T560-240H400q-17 0-28.5 11.5T360-200q0 17 11.5 28.5T400-160Z"/></MaterialIcon>;
 }
 
 export function PassportIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}>
-            <rect x="3" y="4" width="18" height="16" rx="2"/>
-            
-            <circle cx="9" cy="10" r="3" fill="currentColor" opacity="0.3"/>
-            
-            <path d="M5.5 16a4 4 0 0 1 7 0" fill="currentColor" opacity="0.3"/>
-            
-            <path d="M14 8h5M14 11h4M14 14h5" stroke="currentColor" opacity="0.3" strokeWidth="1.2"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M160-80q-33 0-56.5-23.5T80-160v-440q0-33 23.5-56.5T160-680h200v-120q0-33 23.5-56.5T440-880h80q33 0 56.5 23.5T600-800v120h200q33 0 56.5 23.5T880-600v440q0 33-23.5 56.5T800-80H160Zm0-80h640v-440H600q0 33-23.5 56.5T520-520h-80q-33 0-56.5-23.5T360-600H160v440Zm80-80h240v-18q0-17-9.5-31.5T444-312q-20-9-40.5-13.5T360-330q-23 0-43.5 4.5T276-312q-17 8-26.5 22.5T240-258v18Zm320-60h160v-60H560v60Zm-157.5-77.5Q420-395 420-420t-17.5-42.5Q385-480 360-480t-42.5 17.5Q300-445 300-420t17.5 42.5Q335-360 360-360t42.5-17.5ZM560-420h160v-60H560v60ZM440-600h80v-200h-80v200Zm40 220Z"/></MaterialIcon>;
 }
 
 export function SignatureIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M2 17c2.5 0 2.2-5 4.5-5 1.7 0 1.3 3 2.7 3 1.5 0 1.8-6 4.1-6 1.8 0 1.1 4 2.9 4 1.2 0 2-.6 5.8-3v3c-2.8 2-4 3-5.9 3-1.9 0-2.2-1.5-2.8-2.8-.8 1.7-1.9 4.8-4.3 4.8-2.2 0-2.4-1.8-3-2.8-.8 1.4-1.8 3.8-4 3.8H2v-2Zm0 3h20v2H2v-2Z"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M160-120v-170l527-526q12-12 27-18t30-6q16 0 30.5 6t25.5 18l56 56q12 11 18 25.5t6 30.5q0 15-6 30t-18 27L330-120H160Zm80-80h56l393-392-28-29-29-28-392 393v56Zm560-503-57-57 57 57Zm-139 82-29-28 57 57-28-29ZM560-120q74 0 137-37t63-103q0-36-19-62t-51-45l-59 59q23 10 36 22t13 26q0 23-36.5 41.5T560-200q-17 0-28.5 11.5T520-160q0 17 11.5 28.5T560-120ZM183-426l60-60q-20-8-31.5-16.5T200-520q0-12 18-24t76-37q88-38 117-69t29-70q0-55-44-87.5T280-840q-45 0-80.5 16T145-785q-11 13-9 29t15 26q13 11 29 9t27-13q14-14 31-20t42-6q41 0 60.5 12t19.5 28q0 14-17.5 25.5T262-654q-80 35-111 63.5T120-520q0 32 17 54.5t46 39.5Z"/></MaterialIcon>;
 }
 
 export function HomeIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"/>
-            <path d="M9 22V12h6v10" fill="currentColor" opacity="0.3"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></MaterialIcon>;
 }
 
 export function SearchIcon(props: IconProps) {
-  return <BaseIcon fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><circle cx="10" cy="10" r="6"/>
-            <path d="M14 14l6 6"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></MaterialIcon>;
 }
 
 export function MenuIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></MaterialIcon>;
 }
 
 export function BackIcon(props: IconProps) {
-  return <BaseIcon fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M19 12H5M12 19l-7-7 7-7"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></MaterialIcon>;
 }
 
 export function NextIcon(props: IconProps) {
-  return <BaseIcon fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M5 12h14M12 5l7 7-7 7"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></MaterialIcon>;
 }
 
 export function SunIcon(props: IconProps) {
-  return <BaseIcon fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><circle cx="12" cy="12" r="5"/>
-            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M565-395q35-35 35-85t-35-85q-35-35-85-35t-85 35q-35 35-35 85t35 85q35 35 85 35t85-35Zm-226.5 56.5Q280-397 280-480t58.5-141.5Q397-680 480-680t141.5 58.5Q680-563 680-480t-58.5 141.5Q563-280 480-280t-141.5-58.5ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Zm326-268Z"/></MaterialIcon>;
 }
 
 export function MoonIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Zm0-80q88 0 158-48.5T740-375q-20 5-40 8t-40 3q-123 0-209.5-86.5T364-660q0-20 3-40t8-40q-78 32-126.5 102T200-480q0 116 82 198t198 82Zm-10-270Z"/></MaterialIcon>;
 }
 
 export function UploadIcon(props: IconProps) {
-  return <BaseIcon fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>
-            <path d="M7 9l5-5 5 5"/>
-            <path d="M12 4v12"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M440-320v-326L336-542l-56-58 200-200 200 200-56 58-104-104v326h-80ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></MaterialIcon>;
 }
 
 export function FolderIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h240l80 80h320q33 0 56.5 23.5T880-640v400q0 33-23.5 56.5T800-160H160Zm0-80h640v-400H447l-80-80H160v480Zm0 0v-480 480Z"/></MaterialIcon>;
 }
 
 export function FileIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/>
-            <path d="M13 2v7h7"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M320-240h320v-80H320v80Zm0-160h320v-80H320v80ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z"/></MaterialIcon>;
 }
 
 export function FilesIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M15 2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h9Z"/>
-            <path d="M15 2v5h5"/>
-            <path d="M9 18v2a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V9l-5-5h-6a2 2 0 0 0-2 2v2" fill="currentColor" opacity="0.3"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M760-200H320q-33 0-56.5-23.5T240-280v-560q0-33 23.5-56.5T320-920h280l240 240v400q0 33-23.5 56.5T760-200ZM560-640v-200H320v560h440v-360H560ZM160-40q-33 0-56.5-23.5T80-120v-560h80v560h440v80H160Zm160-800v200-200 560-560Z"/></MaterialIcon>;
 }
 
 export function DownloadIcon(props: IconProps) {
-  return <BaseIcon fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>
-            <path d="M7 11l5 5 5-5"/>
-            <path d="M12 4v12"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></MaterialIcon>;
 }
 
 export function DownloadAllIcon(props: IconProps) {
-  return <BaseIcon fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>
-            <path d="M7 11l5 5 5-5"/>
-            <path d="M12 4v12"/>
-            <path d="M8 2h8M8 1h8"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></MaterialIcon>;
 }
 
 export function CloseIcon(props: IconProps) {
-  return <BaseIcon fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M18 6L6 18M6 6l12 12"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></MaterialIcon>;
 }
 
 export function ResetIcon(props: IconProps) {
-  return <BaseIcon fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M3 12a9 9 0 1 0 9-9 9 9 0 0 0-6.5 2.8"/>
-            <path d="M3 4v4h4"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z"/></MaterialIcon>;
 }
 
 export function SettingsIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-2.82 1.18V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0-1.18-2.82H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 3.417 1.415 2 2 0 0 1-.587 1.415l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm70-80h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Zm42-180q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 99t99.5 41Zm-2-140Z"/></MaterialIcon>;
 }
 
 export function MoreIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><circle cx="12" cy="5" r="1.5"/>
-            <circle cx="12" cy="12" r="1.5"/>
-            <circle cx="12" cy="19" r="1.5"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></MaterialIcon>;
 }
 
 export function DeleteIcon(props: IconProps) {
-  return <BaseIcon fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M3 6h18"/>
-            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
-            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-            <path d="M10 11v6"/>
-            <path d="M14 11v6"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></MaterialIcon>;
 }
 
 export function ViewIcon(props: IconProps) {
-  return <BaseIcon fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
-            <circle cx="12" cy="12" r="3"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M607.5-372.5Q660-425 660-500t-52.5-127.5Q555-680 480-680t-127.5 52.5Q300-575 300-500t52.5 127.5Q405-320 480-320t127.5-52.5Zm-204-51Q372-455 372-500t31.5-76.5Q435-608 480-608t76.5 31.5Q588-545 588-500t-31.5 76.5Q525-392 480-392t-76.5-31.5ZM214-281.5Q94-363 40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200q-146 0-266-81.5ZM480-500Zm207.5 160.5Q782-399 832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280q113 0 207.5-59.5Z"/></MaterialIcon>;
 }
 
 export function SuccessIcon(props: IconProps) {
-  return <BaseIcon fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><circle cx="12" cy="12" r="10"/>
-            <path d="M9 12l2 2 4-4"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></MaterialIcon>;
 }
 
 export function WarningIcon(props: IconProps) {
-  return <BaseIcon fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/>
-            <path d="M12 9v4"/>
-            <path d="M12 17h.01"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm330.5-51.5Q520-263 520-280t-11.5-28.5Q497-320 480-320t-28.5 11.5Q440-297 440-280t11.5 28.5Q463-240 480-240t28.5-11.5ZM440-360h80v-200h-80v200Zm40-100Z"/></MaterialIcon>;
 }
 
 export function InfoIcon(props: IconProps) {
-  return <BaseIcon fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><circle cx="12" cy="12" r="10"/>
-            <path d="M12 16v-4"/>
-            <path d="M12 8h.01"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M440-280h80v-240h-80v240Zm68.5-331.5Q520-623 520-640t-11.5-28.5Q497-680 480-680t-28.5 11.5Q440-657 440-640t11.5 28.5Q463-600 480-600t28.5-11.5ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></MaterialIcon>;
 }
 
 export function ErrorIcon(props: IconProps) {
-  return <BaseIcon fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><circle cx="12" cy="12" r="10"/>
-            <path d="M15 9l-6 6"/>
-            <path d="M9 9l6 6"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M508.5-291.5Q520-303 520-320t-11.5-28.5Q497-360 480-360t-28.5 11.5Q440-337 440-320t11.5 28.5Q463-280 480-280t28.5-11.5ZM440-440h80v-240h-80v240Zm40 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></MaterialIcon>;
 }
 
 export function ProcessingIcon(props: IconProps) {
-  return <BaseIcon fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M320-160h320v-120q0-66-47-113t-113-47q-66 0-113 47t-47 113v120Zm273-407q47-47 47-113v-120H320v120q0 66 47 113t113 47q66 0 113-47ZM160-80v-80h80v-120q0-61 28.5-114.5T348-480q-51-32-79.5-85.5T240-680v-120h-80v-80h640v80h-80v120q0 61-28.5 114.5T612-480q51 32 79.5 85.5T720-280v120h80v80H160Z"/></MaterialIcon>;
 }
 
 export function MoveUpIcon(props: IconProps) {
-  return <BaseIcon fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M12 19V5"/>
-            <path d="M5 12l7-7 7 7"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z"/></MaterialIcon>;
 }
 
 export function MoveDownIcon(props: IconProps) {
-  return <BaseIcon fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M12 5v14"/>
-            <path d="M19 12l-7 7-7-7"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></MaterialIcon>;
 }
 
 export function DragHandleIcon(props: IconProps) {
-  return <BaseIcon fill="currentColor" stroke="none" {...props}><circle cx="9" cy="5" r="1.5"/>
-            <circle cx="9" cy="12" r="1.5"/>
-            <circle cx="9" cy="19" r="1.5"/>
-            <circle cx="15" cy="5" r="1.5"/>
-            <circle cx="15" cy="12" r="1.5"/>
-            <circle cx="15" cy="19" r="1.5"/></BaseIcon>;
+  return <MaterialIcon {...props}><path d="M360-160q-33 0-56.5-23.5T280-240q0-33 23.5-56.5T360-320q33 0 56.5 23.5T440-240q0 33-23.5 56.5T360-160Zm240 0q-33 0-56.5-23.5T520-240q0-33 23.5-56.5T600-320q33 0 56.5 23.5T680-240q0 33-23.5 56.5T600-160ZM360-400q-33 0-56.5-23.5T280-480q0-33 23.5-56.5T360-560q33 0 56.5 23.5T440-480q0 33-23.5 56.5T360-400Zm240 0q-33 0-56.5-23.5T520-480q0-33 23.5-56.5T600-560q33 0 56.5 23.5T680-480q0 33-23.5 56.5T600-400ZM360-640q-33 0-56.5-23.5T280-720q0-33 23.5-56.5T360-800q33 0 56.5 23.5T440-720q0 33-23.5 56.5T360-640Zm240 0q-33 0-56.5-23.5T520-720q0-33 23.5-56.5T600-800q33 0 56.5 23.5T680-720q0 33-23.5 56.5T600-640Z"/></MaterialIcon>;
 }
+

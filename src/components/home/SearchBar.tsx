@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './SearchBar.module.css';
 import { ToolDefinition } from '../../types/tool';
 import { ToolIcon } from '../icons/ToolIcon';
+import { SearchIcon } from '../icons/IconRegistry';
 
 interface SearchBarProps { onSearch?: (q: string) => void; results?: ToolDefinition[]; }
 
@@ -16,9 +17,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, results = [] }) 
   return (
     <div className={styles.container}>
       <div className={styles.inputWrapper}>
-        <svg className={styles.icon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
+        <span className={styles.icon}><SearchIcon size={24} /></span>
         <input
           type="text" className={styles.input} placeholder="Search for tools..."
           value={query} onChange={(e) => setQuery(e.target.value)}

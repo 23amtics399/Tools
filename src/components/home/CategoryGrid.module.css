@@ -4,7 +4,7 @@
   border-radius: var(--radius-lg); transition: all var(--transition-normal); cursor: pointer;
 }
 .card:hover { border-color: var(--hover-color); box-shadow: 0 8px 24px rgba(0,0,0,0.2); transform: translateY(-2px); }
-.icon { font-size: 3rem; margin-bottom: 1rem; }
+.icon { font-size: 3rem; margin-bottom: 1rem; color: var(--hover-color); }
 .name { font-size: 1.25rem; font-weight: 700; margin: 0 0 0.5rem; color: var(--color-text); }
 .desc { font-size: 0.875rem; color: var(--color-text-muted); margin: 0 0 1rem; }
 .count { font-size: 0.875rem; font-weight: 600; color: var(--color-primary); }
